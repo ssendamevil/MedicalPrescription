@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medical_prescription/presentation/screens/catalogue_screen.dart';
+import 'package:medical_prescription/presentation/screens/search_result_screen.dart';
 import 'package:medical_prescription/presentation/screens/search_screen.dart';
 
 final ValueNotifier searchPageScreenIndex = ValueNotifier(0);
@@ -9,7 +10,8 @@ class SearchPage extends StatefulWidget {
 
   final List<Widget> screens = [
     CatalogueScreen(),
-    const SearchScreen()
+    const SearchScreen(),
+    const SearchResultScreen()
   ];
 
   @override

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:medical_prescription/presentation/app.dart';
+import 'package:medical_prescription/presentation/screens/cart_screen.dart';
+
+final ValueNotifier cartPageIndex = ValueNotifier(1);
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -11,20 +14,11 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [
-            Text("Cart"),
-            ElevatedButton(
-                onPressed: (){
-                  selectedIndexGlobal.value = 4;
-                },
-                child: Text("To Profile")
-            )
-          ],
-        ),
-      ),
+    return ValueListenableBuilder(
+        valueListenable: cartPageIndex,
+        builder: (context, val, index){
+          return CartScreen();
+        }
     );
   }
 }

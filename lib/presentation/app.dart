@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medical_prescription/core/util/theme/AppTheme.dart';
+import 'package:medical_prescription/presentation/bloc/search_bloc/search_bloc.dart';
 import 'package:medical_prescription/presentation/pages/appointment_page.dart';
 import 'package:medical_prescription/presentation/pages/cart_page.dart';
 import 'package:medical_prescription/presentation/pages/home_page.dart';
@@ -14,7 +16,14 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AppView();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<SearchBloc>(
+            create: (context) => SearchBloc()
+        )
+      ],
+      child: const AppView()
+    );
   }
 }
 
@@ -38,15 +47,15 @@ class _AppViewState extends State<AppView> {
         valueListenable: selectedIndexGlobal,
         builder: (context,val, child){
           return Scaffold(
-            extendBody: true,
             body: <Widget>[
-              const HomePage(),
+              HomePage(),
               SearchPage(),
               const AppointmentPage(),
               const CartPage(),
               const ProfilePage(),
             ][selectedIndexGlobal.value],
             bottomNavigationBar: Container(
+              height: 60,
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topRight: Radius.circular(15), topLeft: Radius.circular(15)),
@@ -70,8 +79,8 @@ class _AppViewState extends State<AppView> {
                     });
                   },
                   currentIndex: selectedIndexGlobal.value,
-                  selectedItemColor: Color(0xff04726E),
-                  unselectedItemColor: Color(0xffA5A5A5),
+                  selectedItemColor: const Color(0xff04726E),
+                  unselectedItemColor: const Color(0xffA5A5A5),
                   showUnselectedLabels: true,
                   type: BottomNavigationBarType.fixed,
                   selectedLabelStyle: GoogleFonts.montserrat(
@@ -108,7 +117,7 @@ class _AppViewState extends State<AppView> {
                         label: 'Cart'
                     ),
                     BottomNavigationBarItem(
-                        icon: Icon(Iconsax.user),
+                        icon: Icon(Iconsax.profile_circle),
                         label: 'Profile'
                     )
                   ],

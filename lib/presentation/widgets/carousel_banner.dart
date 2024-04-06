@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class SliderBanner extends StatefulWidget {
-  SliderBanner({Key? key}) : super(key: key);
+  const SliderBanner({Key? key}) : super(key: key);
 
   @override
   State<SliderBanner> createState() => _SliderBannerState();
@@ -32,16 +32,23 @@ class _SliderBannerState extends State<SliderBanner> {
               builder: (BuildContext context) {
                 return Container(
                     width: MediaQuery.of(context).size.width-40.0,
-                    decoration: const BoxDecoration(
-                        color: Color(0xffD9D9D9),
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))
-                    )
+                    height: 180,
+                    decoration: BoxDecoration(
+
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(
+                        "assets/images/bannerimage.jpg",
+                        fit: BoxFit.fill,
+                      ),
+                    ),
                 );
               },
             );
           }).toList(),
         ),
-        SizedBox(height: 10,),
+        const SizedBox(height: 10,),
         AnimatedSmoothIndicator(
             activeIndex: myCurrentIndex,
             count: 5,

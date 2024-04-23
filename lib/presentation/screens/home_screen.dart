@@ -5,11 +5,12 @@ import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 import '../../core/util/theme/Colors.dart';
 import '../app.dart';
-import '../components/Labels.dart';
+import '../components/section_labels.dart';
 import '../pages/search_page.dart';
-import '../widgets/carousel_banner.dart';
-import '../widgets/carousel_prescription.dart';
+import '../widgets/slider_banner.dart';
+import '../widgets/slider_prescription.dart';
 import '../widgets/recent_order_slider.dart';
+import 'package:iconly/iconly.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80),
+          preferredSize: const Size.fromHeight(84),
           child: AppBar(
             scrolledUnderElevation: 0,
             shadowColor: Colors.transparent,
@@ -37,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width-40.0,
-                    height: 40,
+                    height: 44,
                     child: ElevatedButton(
                       onPressed: (){
                         selectedIndexGlobal.value = 1;
@@ -46,16 +47,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0),
+                            side: const BorderSide(color: Color(0xffE8F3F1), width: 1.0),
+                            borderRadius: BorderRadius.circular(30.0),
                           )
                         ),
                         shadowColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
                         iconColor: MaterialStatePropertyAll<Color>(customBlack.shade200),
-                        backgroundColor: const MaterialStatePropertyAll<Color>(Color(0xffEEEDED)),
+                        backgroundColor: const MaterialStatePropertyAll<Color>(Color(0xffFBFBFB)),
                       ),
                       child: Row(
                         children: [
-                          const Icon(CupertinoIcons.search),
+                          const Icon(IconlyLight.search),
                           const SizedBox(width: 10,),
                           Text(
                             "Search in pharmacies of the city",

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medical_prescription/presentation/app.dart';
 import 'package:medical_prescription/presentation/screens/cart_screen.dart';
 
 final ValueNotifier cartPageIndex = ValueNotifier(1);
@@ -17,7 +16,7 @@ class _CartPageState extends State<CartPage> {
     return ValueListenableBuilder(
         valueListenable: cartPageIndex,
         builder: (context, val, index){
-          return CartScreen();
+          return const CartScreen();
         }
     );
   }

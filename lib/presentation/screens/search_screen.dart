@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medical_prescription/presentation/bloc/search_bloc/search_bloc.dart';
-import 'package:medical_prescription/presentation/components/SearchResultTab.dart';
+import 'package:medical_prescription/presentation/components/search_result_tab.dart';
 import 'package:medical_prescription/presentation/pages/search_page.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);

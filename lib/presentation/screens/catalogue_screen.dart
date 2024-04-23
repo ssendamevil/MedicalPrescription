@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medical_prescription/core/util/theme/Colors.dart';
+import 'package:medical_prescription/presentation/bloc/catalogue_bloc/catalogue_bloc.dart';
 import '../app.dart';
 import '../pages/search_page.dart';
 
@@ -26,7 +27,6 @@ class CatalogueScreen extends StatefulWidget {
 }
 
 class _CatalogueScreenState extends State<CatalogueScreen> {
-
   int ind = 0;
   double leftX = 0;
   String title = 'Catalog';
@@ -69,7 +69,7 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
           Container(
             height: 170.0,
             width: MediaQuery.of(context).size.width,
-            color: const Color(0xff39CBC6),
+            color: const Color(0xff07BEB8),
             padding: const EdgeInsets.only(bottom: 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -129,6 +129,7 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
                     itemBuilder: (BuildContext context, int index) {
                       return ElevatedButton(
                         onPressed: (){
+                          searchCategoryName.value = widget.medicineCategories.values.elementAt(ind).elementAt(index);
                           searchPageScreenIndex.value = 2;
                         },
                         style: const ButtonStyle(
@@ -156,6 +157,7 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
                     separatorBuilder: (BuildContext context, int index) => const Divider(),
                   ),
                 ),
+
                 AnimatedPositioned(
                   curve: Curves.fastLinearToSlowEaseIn,
                   duration: const Duration(milliseconds: 1000),
@@ -175,6 +177,7 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
                         return ElevatedButton(
                           onPressed: (){
                             if(widget.medicineCategories.values.elementAt(index).isEmpty){
+                              searchCategoryName.value = widget.medicineCategories.keys.elementAt(index);
                               searchPageScreenIndex.value = 2;
                             }
                             setState(() {

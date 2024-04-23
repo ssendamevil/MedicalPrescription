@@ -23,9 +23,9 @@ Widget searchResultTab(bool isHistory,String searchResult, BuildContext context)
         children: [
           Row(
             children: [
-              SizedBox(width: 10,),
-              isHistory ? Icon(Icons.history, color: Colors.grey,) : Container(),
-              SizedBox(width: 10,),
+              const SizedBox(width: 10,),
+              isHistory ? const Icon(Icons.history, color: Colors.grey,) : Container(),
+              const SizedBox(width: 10,),
               Text( searchResult,
                 style: Theme.of(context).textTheme.titleMedium,
               ),

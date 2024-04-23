@@ -14,32 +14,26 @@ class _AppointmentPageState extends State<AppointmentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
-      extendBodyBehindAppBar: true,
       backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Color(0xff07BEB8),
         scrolledUnderElevation: 0,
         title: Text(
           "Treatment Scheme",
-          style: GoogleFonts.nunitoSans(
+          style: GoogleFonts.montserrat(
               fontSize: 18.0,
-              fontWeight: FontWeight.w900
+              fontWeight: FontWeight.w700
           ),
         ),
-        backgroundColor: const Color(0xff07BEB8),
+        shape: const Border(
+            bottom: BorderSide(
+                color: Color(0xffD9D9D9)
+            )
+        ),
         centerTitle: true,
       ),
       body: Column(
         children: [
-          ClipPath(
-            clipper: BottomCurveClipper(),
-            child: Container(
-              height: 140.0,
-              width: MediaQuery.of(context).size.width,
-              color: const Color(0xff07BEB8),
-            ),
-          ),
-
           Expanded(
             child: Container(
               color: Colors.transparent,
@@ -141,35 +135,5 @@ class _AppointmentPageState extends State<AppointmentPage> {
     );
   }
 
-}
-
-class BottomCurveClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-    path.lineTo(0, size.height);
-
-    final firstCurve = Offset(0, size.height - 30);
-    final lastCurve = Offset(35, size.height - 30);
-    path.quadraticBezierTo(firstCurve.dx, firstCurve.dy, lastCurve.dx, lastCurve.dy);
-
-    final secondfirstCurve = Offset(0, size.height - 30);
-    final secondlastCurve = Offset(size.width-35, size.height - 30);
-    path.quadraticBezierTo(secondfirstCurve.dx, secondfirstCurve.dy, secondlastCurve.dx, secondlastCurve.dy);
-
-    final thirdfirstCurve = Offset(size.width, size.height - 30);
-    final thirdlastCurve = Offset(size.width, size.height);
-    path.quadraticBezierTo(thirdfirstCurve.dx, thirdfirstCurve.dy, thirdlastCurve.dx, thirdlastCurve.dy);
-
-    path.lineTo(size.width, 0);
-    path.close();
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false;
-  }
 }
 

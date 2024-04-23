@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medical_prescription/core/util/theme/AppTheme.dart';
+import 'package:medical_prescription/presentation/bloc/catalogue_bloc/catalogue_bloc.dart';
 import 'package:medical_prescription/presentation/bloc/search_bloc/search_bloc.dart';
 import 'package:medical_prescription/presentation/pages/appointment_page.dart';
+import 'package:medical_prescription/presentation/pages/auth_page.dart';
 import 'package:medical_prescription/presentation/pages/cart_page.dart';
 import 'package:medical_prescription/presentation/pages/home_page.dart';
 import 'package:medical_prescription/presentation/pages/profile_page.dart';
@@ -20,6 +22,9 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider<SearchBloc>(
             create: (context) => SearchBloc()
+        ),
+        BlocProvider<CatalogueBloc>(
+          create: (context) => CatalogueBloc(),
         )
       ],
       child: const AppView()
@@ -43,7 +48,15 @@ class _AppViewState extends State<AppView> {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: ValueListenableBuilder(
+      home: _checkIfAuth()
+    );
+  }
+
+  Widget _checkIfAuth(){
+    if(false){
+      return const AuthPage();
+    }else{
+      return ValueListenableBuilder(
         valueListenable: selectedIndexGlobal,
         builder: (context,val, child){
           return Scaffold(
@@ -84,17 +97,17 @@ class _AppViewState extends State<AppView> {
                   showUnselectedLabels: true,
                   type: BottomNavigationBarType.fixed,
                   selectedLabelStyle: GoogleFonts.montserrat(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 10,
-                    textStyle: const TextStyle(
-                        overflow: TextOverflow.visible
-                    )
+                      fontWeight: FontWeight.w600,
+                      fontSize: 10,
+                      textStyle: const TextStyle(
+                          overflow: TextOverflow.visible
+                      )
                   ),
                   unselectedLabelStyle: GoogleFonts.montserrat(
                       fontWeight: FontWeight.w600,
                       fontSize: 10,
                       textStyle: const TextStyle(
-                        overflow: TextOverflow.visible
+                          overflow: TextOverflow.visible
                       )
                   ),
                   iconSize: 20,
@@ -126,8 +139,8 @@ class _AppViewState extends State<AppView> {
             ),
           );
         },
-      )
-    );
+      );
+    }
   }
 }
 

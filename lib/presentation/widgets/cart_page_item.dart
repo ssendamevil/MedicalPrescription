@@ -10,6 +10,8 @@ class CartPageItem extends StatefulWidget {
 }
 
 class _CartPageItemState extends State<CartPageItem> {
+  int count = 2;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -79,18 +81,51 @@ class _CartPageItemState extends State<CartPageItem> {
                       children: [
                         Text("from 354₸", style: Theme.of(context).textTheme.titleLarge,),
                         SizedBox(
-                          height: 37,
-                          width: 100,
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                              overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-                              foregroundColor: const MaterialStatePropertyAll(Colors.black),
-                              shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))),
-                              backgroundColor: const MaterialStatePropertyAll(Color(0xff39CBC6))
-                            ),
-                            onPressed: (){},
-                            child: Text("Add", style: GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14))
-                          ),
+                          height: 40,
+                          width: 120,
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                count > 1 ?
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(Iconsax.minus, size: 20,),
+                                    style: const ButtonStyle(
+                                        side: MaterialStatePropertyAll(BorderSide(color:Colors.black)),
+                                        surfaceTintColor: MaterialStatePropertyAll(Colors.transparent),
+                                        overlayColor: MaterialStatePropertyAll(Colors.transparent)
+                                    ),
+                                  ) :
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(Iconsax.trash, size: 20, color: Colors.grey),
+                                    style: const ButtonStyle(
+                                        side: MaterialStatePropertyAll(BorderSide(color:Colors.grey)),
+                                        surfaceTintColor: MaterialStatePropertyAll(Colors.transparent),
+                                        overlayColor: MaterialStatePropertyAll(Colors.transparent)
+                                    ),
+                                  ),
+                                const SizedBox(width: 2,),
+                                Text(
+                                  "$count",
+                                  style: const TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w600
+                                  ),
+                                ),
+                                const SizedBox(width: 2,),
+                                IconButton(
+                                  style: const ButtonStyle(
+                                      side: MaterialStatePropertyAll(BorderSide(color: Colors.black)),
+                                      surfaceTintColor: MaterialStatePropertyAll(Colors.transparent),
+                                      overlayColor: MaterialStatePropertyAll(Colors.transparent)
+                                  ),
+                                  onPressed: (){},
+                                  icon: const Icon(Iconsax.add)
+                                )
+                              ],
+                            )
                         )
                       ],
                     )

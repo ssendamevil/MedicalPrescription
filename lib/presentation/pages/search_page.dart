@@ -4,6 +4,7 @@ import 'package:medical_prescription/presentation/screens/search_result_screen.d
 import 'package:medical_prescription/presentation/screens/search_screen.dart';
 
 final ValueNotifier searchPageScreenIndex = ValueNotifier(0);
+final ValueNotifier searchCategoryName = ValueNotifier("");
 
 class SearchPage extends StatefulWidget {
   SearchPage({Key? key}) : super(key: key);

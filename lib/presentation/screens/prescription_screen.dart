@@ -56,7 +56,7 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                         RepaintBoundary(
                           key: globalKey,
                           child: Center(
-                            child: QrImage(
+                            child: QrImageView(
                               data: qrData,
                               version: QrVersions.auto,
                               size: 200,
@@ -82,165 +82,160 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
       ),
       body: Column(
         children: [
-          ClipPath(
-            clipper: BottomCurveClipper(),
-            child: Container(
-              height: 120.0,
-              width: MediaQuery.of(context).size.width,
-              color: const Color(0xff07BEB8),
-              child: Column(
-                children: [
-                  const Text("№1784554884"),
-                  const SizedBox(height: 20,),
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 25),
-                    decoration: BoxDecoration(
-                        color: Colors.black12,
-                        borderRadius: BorderRadius.circular(5)
-                    ),
-                    child: Text(
-                      "The validity period expires in 10 days",
-                      style: GoogleFonts.montserrat(
-                          textStyle: Theme.of(context).textTheme.labelMedium,
-                          color: Colors.white
-                      ),
+          Container(
+            height: 120.0,
+            width: MediaQuery.of(context).size.width,
+            color: const Color(0xff07BEB8),
+            child: Column(
+              children: [
+                const Text("№1784554884"),
+                const SizedBox(height: 20,),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 25),
+                  decoration: BoxDecoration(
+                      color: Colors.black12,
+                      borderRadius: BorderRadius.circular(5)
+                  ),
+                  child: Text(
+                    "The validity period expires in 10 days",
+                    style: GoogleFonts.montserrat(
+                        textStyle: Theme.of(context).textTheme.labelMedium,
+                        color: Colors.white
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 270,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: const Color(0xffAAAAAA))
-                    ),
-                    child: LayoutBuilder(
-                      builder: (BuildContext context, BoxConstraints constraints) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 50,
-                              width: double.maxFinite,
-                              alignment: Alignment.centerLeft,
-                              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-                              decoration: const BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.vertical(top: Radius.circular(20), bottom: Radius.circular(0)),
-                              ),
-                              child: Text(
-                                "Azithromycin",
-                                style: GoogleFonts.montserrat(
-                                    color: Colors.white,
-                                    textStyle: Theme.of(context).textTheme.titleLarge
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: double.maxFinite,
-                              height: constraints.maxHeight-50,
-                              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.vertical(top: Radius.circular(0), bottom: Radius.circular(20)),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text("Form",
-                                        style: GoogleFonts.montserrat(
-                                            textStyle: Theme.of(context).textTheme.bodySmall,
-                                            color: Colors.grey
-                                        ),
-                                      ),
-                                      const SizedBox(height: 5,),
-                                      Text("Sublingual tablets", style: Theme.of(context).textTheme.titleLarge,),
-                                      const SizedBox(height: 20,),
-                                      Text("Dosage",
-                                        style: GoogleFonts.montserrat(
-                                            textStyle: Theme.of(context).textTheme.bodySmall,
-                                            color: Colors.grey
-                                        ),
-                                      ),
-                                      const SizedBox(height: 5,),
-                                      Text("100 mg", style: Theme.of(context).textTheme.titleLarge,),
-                                    ],
-                                  ),
-                                  Center(child:
-                                    SizedBox(
-                                      width: 270,
-                                      child: ElevatedButton(
-                                        onPressed: (){},
-                                        style: ButtonStyle(
-                                          surfaceTintColor: const MaterialStatePropertyAll<Color>(Colors.black),
-                                          shadowColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
-                                          backgroundColor: const MaterialStatePropertyAll<Color>(Color(0xff07BEB8)),
-                                          overlayColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
-                                          shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)))
-                                        ),
-                                        child: Text("Buy at 899",
-                                          style: GoogleFonts.montserrat(
-                                            textStyle: Theme.of(context).textTheme.bodyMedium,
-                                            color: Colors.white
-                                          ),
-                                        )
-                                      ),
-                                    )
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        );
-                      },
-                    ),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 270,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: const Color(0xffAAAAAA))
                   ),
-                  const SizedBox(height: 50,),
-                  Text("Discharged doctor",
-                    style: Theme.of(context).textTheme.headlineSmall
-                  ),
-                  const SizedBox(height: 15,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
+                  child: LayoutBuilder(
+                    builder: (BuildContext context, BoxConstraints constraints) {
+                      return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Berikov Berik Berikulu", style: Theme.of(context).textTheme.titleLarge),
-                          Text("Dermatovenerologist", style: GoogleFonts.montserrat(textStyle: Theme.of(context).textTheme.bodyMedium, color: Colors.grey),),
-                          Text("Сity polyclinic No. 4", style: GoogleFonts.montserrat(textStyle: Theme.of(context).textTheme.bodyMedium, fontWeight: FontWeight.w600),),
-                        ],
-                      ),
-                      IconButton(
-                        onPressed: (){},
-                        icon: const Icon(Icons.phone_in_talk, color: Colors.grey,size: 25,),
-                        style: ButtonStyle(
-                          padding: const MaterialStatePropertyAll(EdgeInsets.all(12)),
-                          shape: MaterialStatePropertyAll(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                              side: const BorderSide(color: Colors.grey, width: 2)
-                            )
+                          Container(
+                            height: 50,
+                            width: double.maxFinite,
+                            alignment: Alignment.centerLeft,
+                            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                            decoration: const BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.vertical(top: Radius.circular(20), bottom: Radius.circular(0)),
+                            ),
+                            child: Text(
+                              "Azithromycin",
+                              style: GoogleFonts.montserrat(
+                                  color: Colors.white,
+                                  textStyle: Theme.of(context).textTheme.titleLarge
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: double.maxFinite,
+                            height: constraints.maxHeight-50,
+                            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                            decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.vertical(top: Radius.circular(0), bottom: Radius.circular(20)),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text("Form",
+                                      style: GoogleFonts.montserrat(
+                                          textStyle: Theme.of(context).textTheme.bodySmall,
+                                          color: Colors.grey
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5,),
+                                    Text("Sublingual tablets", style: Theme.of(context).textTheme.titleLarge,),
+                                    const SizedBox(height: 20,),
+                                    Text("Dosage",
+                                      style: GoogleFonts.montserrat(
+                                          textStyle: Theme.of(context).textTheme.bodySmall,
+                                          color: Colors.grey
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5,),
+                                    Text("100 mg", style: Theme.of(context).textTheme.titleLarge,),
+                                  ],
+                                ),
+                                Center(child:
+                                  SizedBox(
+                                    width: 270,
+                                    child: ElevatedButton(
+                                      onPressed: (){},
+                                      style: ButtonStyle(
+                                        surfaceTintColor: const MaterialStatePropertyAll<Color>(Colors.black),
+                                        shadowColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
+                                        backgroundColor: const MaterialStatePropertyAll<Color>(Color(0xff07BEB8)),
+                                        overlayColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
+                                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)))
+                                      ),
+                                      child: Text("Buy at 899",
+                                        style: GoogleFonts.montserrat(
+                                          textStyle: Theme.of(context).textTheme.bodyMedium,
+                                          color: Colors.white
+                                        ),
+                                      )
+                                    ),
+                                  )
+                                )
+                              ],
+                            ),
                           )
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            )
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(height: 50,),
+                Text("Discharged doctor",
+                  style: Theme.of(context).textTheme.headlineSmall
+                ),
+                const SizedBox(height: 15,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Berikov Berik Berikulu", style: Theme.of(context).textTheme.titleLarge),
+                        Text("Dermatovenerologist", style: GoogleFonts.montserrat(textStyle: Theme.of(context).textTheme.bodyMedium, color: Colors.grey),),
+                        Text("Сity polyclinic No. 4", style: GoogleFonts.montserrat(textStyle: Theme.of(context).textTheme.bodyMedium, fontWeight: FontWeight.w600),),
+                      ],
+                    ),
+                    IconButton(
+                      onPressed: (){},
+                      icon: const Icon(Icons.phone_in_talk, color: Colors.grey,size: 25,),
+                      style: ButtonStyle(
+                        padding: const MaterialStatePropertyAll(EdgeInsets.all(12)),
+                        shape: MaterialStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            side: const BorderSide(color: Colors.grey, width: 2)
+                          )
+                        )
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
           )
         ],
       ),

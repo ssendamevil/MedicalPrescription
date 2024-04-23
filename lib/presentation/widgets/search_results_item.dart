@@ -33,7 +33,7 @@ class _SearchResultsItemState extends State<SearchResultsItem> {
               borderRadius: BorderRadius.circular(15.0),
             )
           ),
-          backgroundColor: MaterialStatePropertyAll(Colors.white),
+          backgroundColor: const MaterialStatePropertyAll(Colors.white),
           overlayColor: const MaterialStatePropertyAll(Colors.transparent),
         ),
         onPressed: (){},
@@ -54,8 +54,8 @@ class _SearchResultsItemState extends State<SearchResultsItem> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Но-шпа", style: Theme.of(context).textTheme.headlineSmall,),
-                        SizedBox(height: 4,),
-                        Row(
+                        const SizedBox(height: 4,),
+                        const Row(
                           children: [
                             Icon(Iconsax.warning_2, size: 16,color: Colors.orange,),
                             SizedBox(width: 5,),
@@ -67,9 +67,9 @@ class _SearchResultsItemState extends State<SearchResultsItem> {
                             )
                           ],
                         ),
-                        SizedBox(height: 5,),
+                        const SizedBox(height: 5,),
                         Text("Flacon, 0.5g",style: Theme.of(context).textTheme.bodyLarge,),
-                        SizedBox(height: 5,),
+                        const SizedBox(height: 5,),
                         Text("PJSC Sintez Joint Stock Kurgan, Russia",style: Theme.of(context).textTheme.bodyLarge,),
                       ],
                     ),
@@ -82,10 +82,10 @@ class _SearchResultsItemState extends State<SearchResultsItem> {
                           width: 100,
                           child: ElevatedButton(
                             style: ButtonStyle(
-                              overlayColor: MaterialStatePropertyAll(Colors.transparent),
-                              foregroundColor: MaterialStatePropertyAll(Colors.black),
+                              overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+                              foregroundColor: const MaterialStatePropertyAll(Colors.black),
                               shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))),
-                              backgroundColor: MaterialStatePropertyAll(Color(0xff39CBC6))
+                              backgroundColor: const MaterialStatePropertyAll(Color(0xff39CBC6))
                             ),
                             onPressed: (){},
                             child: Text("Add", style: GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14))

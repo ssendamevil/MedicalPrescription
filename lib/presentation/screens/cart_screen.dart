@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medical_prescription/presentation/widgets/cart_page_item.dart';
+
+import '../bloc/cart_bloc/cart_bloc.dart';
 
 
 
@@ -13,6 +16,15 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  late CartBloc cartBloc;
+  
+  @override
+  void initState() {
+    cartBloc = context.read<CartBloc>();
+    super.initState();
+  }
+  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,18 +44,18 @@ class _CartScreenState extends State<CartScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         width: MediaQuery.of(context).size.width,
         color: const Color(0xffF0F0F0),
-        child: ListView(
-          children: const [
-            SizedBox(height: 15,),
-            CartPageItem(),
-            SizedBox(height: 15,),
-            CartPageItem(),
-            SizedBox(height: 15,),
-            CartPageItem(),
-            SizedBox(height: 15,),
-            CartPageItem(),
-            SizedBox(height: 10,),
-          ],
+        child: BlocBuilder<CartBloc, CartState>(
+          builder: (context, state) {
+            return ListView.separated(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              scrollDirection: Axis.vertical,
+              itemBuilder: (BuildContext context, int index){
+                return CartPageItem(cartItemEntity: state.cartItems.elementAt(index),);
+              },
+              separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 15,),
+              itemCount: state.cartItems.length,
+            );
+          },
         ),
       ),
       persistentFooterButtons: [

@@ -40,7 +40,9 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
   Future<void> _onSearch(DynamicSearchEvent event, Emitter<SearchState> emit) async{
     emit(state.copyOf(state: SearchStateType.isLoading));
-    List<String> results = [];
+    List<String> results = [
+
+    ];
 
     if(event.searchText.isNotEmpty) {
       for (String word in allResults) {

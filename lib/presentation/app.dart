@@ -12,6 +12,8 @@ import 'package:medical_prescription/presentation/pages/home_page.dart';
 import 'package:medical_prescription/presentation/pages/profile_page.dart';
 import 'package:medical_prescription/presentation/pages/search_page.dart';
 
+import 'bloc/cart_bloc/cart_bloc.dart';
+
 final ValueNotifier selectedIndexGlobal = ValueNotifier(0);
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -25,6 +27,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<CatalogueBloc>(
           create: (context) => CatalogueBloc(),
+        ),
+        BlocProvider<CartBloc>(
+          create: (context) => CartBloc(),
         )
       ],
       child: const AppView()

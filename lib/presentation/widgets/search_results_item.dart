@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:medical_prescription/domain/entities/cartItem.dart';
+import 'package:medical_prescription/domain/entities/medicament.dart';
+import 'package:medical_prescription/presentation/bloc/cart_bloc/cart_bloc.dart';
 
 class SearchResultsItem extends StatefulWidget {
   const SearchResultsItem({Key? key}) : super(key: key);
@@ -10,6 +14,15 @@ class SearchResultsItem extends StatefulWidget {
 }
 
 class _SearchResultsItemState extends State<SearchResultsItem> {
+  late CartBloc cartBloc;
+
+  @override
+  void initState() {
+    cartBloc = context.read<CartBloc>();
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -87,7 +100,9 @@ class _SearchResultsItemState extends State<SearchResultsItem> {
                               shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))),
                               backgroundColor: const MaterialStatePropertyAll(Color(0xff39CBC6))
                             ),
-                            onPressed: (){},
+                            onPressed: (){
+                              cartBloc.add(AddMedicamentToCartEvent(CartItemEntity("1234", MedicamentEntity("name", "price", "country", "company", 1), 1)));
+                            },
                             child: Text("Add", style: GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14))
                           ),
                         )

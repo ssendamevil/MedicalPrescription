@@ -9,7 +9,7 @@ part 'catalogue_state.dart';
 class CatalogueBloc extends Bloc<CatalogueEvent, CatalogueState> {
   CatalogueBloc() : super(CatalogueInitial()) {
     on<CatalogueEvent>((event, emit) {
-      // TODO: implement event handler
+
     });
   }
 }

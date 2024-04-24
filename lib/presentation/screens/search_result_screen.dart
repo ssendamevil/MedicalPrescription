@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:medical_prescription/presentation/bloc/cart_bloc/cart_bloc.dart';
 import 'package:medical_prescription/presentation/bloc/catalogue_bloc/catalogue_bloc.dart';
 import 'package:medical_prescription/presentation/widgets/search_results_item.dart';
 import '../pages/search_page.dart';
@@ -18,12 +19,14 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
   late TextEditingController _fromEditingController;
   late TextEditingController _toEditingController;
   late CatalogueBloc catalogueBloc;
+  late CartBloc cartBloc;
   RangeValues selectedRange = const RangeValues(800, 1500);
 
   @override
   void initState() {
     super.initState();
     catalogueBloc = context.read<CatalogueBloc>();
+    cartBloc = context.read<CartBloc>();
     _fromEditingController = TextEditingController(text: "800");
     _toEditingController = TextEditingController(text: "1500");
   }
@@ -313,14 +316,6 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                                 height: 50,
                                                 child: ElevatedButton(
                                                   onPressed: (){},
-                                                  child: Text(
-                                                      "Show 2 products",
-                                                      style: GoogleFonts.montserrat(
-                                                          fontWeight: FontWeight.w600,
-                                                          fontSize: 16,
-                                                          color: Colors.white
-                                                      )
-                                                  ),
                                                   style: ButtonStyle(
                                                     surfaceTintColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
                                                     shadowColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
@@ -330,6 +325,14 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                                                             borderRadius: BorderRadius.circular(10.0),
                                                         )
                                                     )
+                                                  ),
+                                                  child: Text(
+                                                      "Show 2 products",
+                                                      style: GoogleFonts.montserrat(
+                                                          fontWeight: FontWeight.w600,
+                                                          fontSize: 16,
+                                                          color: Colors.white
+                                                      )
                                                   ),
                                                 ),
                                               ),
@@ -456,14 +459,6 @@ Future releaseFormModal(BuildContext context){
                             height: 50,
                             child: ElevatedButton(
                               onPressed: (){},
-                              child: Text(
-                                  "Done",
-                                  style: GoogleFonts.montserrat(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16,
-                                      color: Colors.white
-                                  )
-                              ),
                               style: ButtonStyle(
                                   surfaceTintColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
                                   shadowColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
@@ -472,6 +467,14 @@ Future releaseFormModal(BuildContext context){
                                       RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10.0),
                                       )
+                                  )
+                              ),
+                              child: Text(
+                                  "Done",
+                                  style: GoogleFonts.montserrat(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                      color: Colors.white
                                   )
                               ),
                             ),

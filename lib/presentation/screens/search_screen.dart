@@ -129,7 +129,7 @@ class _SearchScreenState extends State<SearchScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 5,),
+              const SizedBox(height: 5,),
               BlocBuilder<SearchBloc, SearchState>(
                   builder: (BuildContext context, SearchState state) {
                     return Container(
@@ -147,7 +147,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               color: Color(0xffE5E5E5),
                             );
                           },
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: state.searchResults.length
                       ),
                     );

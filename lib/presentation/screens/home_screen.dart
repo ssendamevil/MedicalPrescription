@@ -39,19 +39,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width-40.0,
                     height: 44,
-                    child: ElevatedButton(
+                    child: OutlinedButton(
                       onPressed: (){
                         selectedIndexGlobal.value = 1;
                         searchPageScreenIndex.value = 1;
                       },
                       style: ButtonStyle(
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        shape: MaterialStatePropertyAll(
                           RoundedRectangleBorder(
-                            side: const BorderSide(color: Color(0xffE8F3F1), width: 1.0),
-                            borderRadius: BorderRadius.circular(30.0),
+                            borderRadius: BorderRadius.circular(10.0),
+
                           )
                         ),
                         shadowColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
+                        overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                         iconColor: MaterialStatePropertyAll<Color>(customBlack.shade200),
                         backgroundColor: const MaterialStatePropertyAll<Color>(Color(0xffFBFBFB)),
                       ),
@@ -92,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               children: [
                 const SizedBox(height: 15,),
-                SliderBanner(),
+                const SliderBanner(),
                 const SizedBox(height: 15,),
                 sectionLabels(context, "My last prescriptions", true),
                 const SliderPrescriptions(),

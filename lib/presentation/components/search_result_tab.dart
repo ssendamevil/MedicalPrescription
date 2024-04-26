@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
+
+import '../pages/search_page.dart';
 
 Widget searchResultTab(bool isHistory,String searchResult, BuildContext context){
   return SizedBox(
@@ -17,7 +18,10 @@ Widget searchResultTab(bool isHistory,String searchResult, BuildContext context)
           borderRadius: BorderRadius.zero
         )),
       ),
-      onPressed: (){},
+      onPressed: (){
+        searchCategoryName.value = searchResult;
+        searchPageScreenIndex.value = 2;
+      },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -144,7 +144,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           separatorBuilder: (BuildContext context, int index) {
                             return Container(
                               height: .5,
-                              color: Color(0xffE5E5E5),
+                              color: const Color(0xffE5E5E5),
                             );
                           },
                           physics: const NeverScrollableScrollPhysics(),
@@ -188,10 +188,10 @@ class _SearchScreenState extends State<SearchScreen> {
                   separatorBuilder: (BuildContext context, int index) {
                     return Container(
                       height: .5,
-                      color: Color(0xffE5E5E5),
+                      color: const Color(0xffE5E5E5),
                     );
                   },
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: 5
                 ),
               )

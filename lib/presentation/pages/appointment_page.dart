@@ -16,13 +16,14 @@ class _AppointmentPageState extends State<AppointmentPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xff07BEB8),
+        backgroundColor: const Color(0xff199A8E),
         scrolledUnderElevation: 0,
         title: Text(
           "Treatment Scheme",
           style: GoogleFonts.montserrat(
               fontSize: 18.0,
-              fontWeight: FontWeight.w700
+              fontWeight: FontWeight.w700,
+            color: Colors.white
           ),
         ),
         shape: const Border(
@@ -70,14 +71,14 @@ class _AppointmentPageState extends State<AppointmentPage> {
                               color: Colors.grey
                             ),
                           ),
-                          SizedBox(height: 10,),
+                          const SizedBox(height: 10,),
                           Text(
                             "Amikacin, 400mg",
                             style: Theme.of(context).textTheme.headlineSmall
                           ),
-                          SizedBox(height: 10,),
+                          const SizedBox(height: 10,),
                           Container(
-                            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
                             decoration: BoxDecoration(
                               color: Colors.grey,
                               borderRadius: BorderRadius.circular(5)
@@ -90,7 +91,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 20,),
+                          const SizedBox(height: 20,),
                           Text(
                             "Best price",
                             style: GoogleFonts.montserrat(
@@ -104,12 +105,12 @@ class _AppointmentPageState extends State<AppointmentPage> {
                               textStyle: Theme.of(context).textTheme.headlineSmall
                             )
                           ),
-                          SizedBox(height: 20,),
+                          const SizedBox(height: 20,),
                           Text(
                             "Recomendations",
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
-                          SizedBox(height: 10,),
+                          const SizedBox(height: 10,),
                           Text(
                             "5 products available",
                             style: GoogleFonts.montserrat(

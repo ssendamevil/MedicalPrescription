@@ -16,6 +16,8 @@ class SearchResultsItem extends StatefulWidget {
 class _SearchResultsItemState extends State<SearchResultsItem> {
   late CartBloc cartBloc;
 
+  CartItemEntity cartItemEntity = CartItemEntity("1234", MedicamentEntity("name", "price", "country", "company", 1), 1);
+
   @override
   void initState() {
     cartBloc = context.read<CartBloc>();
@@ -93,17 +95,21 @@ class _SearchResultsItemState extends State<SearchResultsItem> {
                         SizedBox(
                           height: 37,
                           width: 100,
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                              overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-                              foregroundColor: const MaterialStatePropertyAll(Colors.black),
-                              shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))),
-                              backgroundColor: const MaterialStatePropertyAll(Color(0xff39CBC6))
-                            ),
-                            onPressed: (){
-                              cartBloc.add(AddMedicamentToCartEvent(CartItemEntity("1234", MedicamentEntity("name", "price", "country", "company", 1), 1)));
-                            },
-                            child: Text("Add", style: GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14))
+                          child: BlocBuilder<CartBloc, CartState>(
+                            builder: (context, state) {
+                              return ElevatedButton(
+                                style: ButtonStyle(
+                                  overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+                                  foregroundColor: const MaterialStatePropertyAll(Colors.black),
+                                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))),
+                                  backgroundColor: state.cartItems.contains(cartItemEntity)? const MaterialStatePropertyAll(Color(0xffAAAAAA)) : const MaterialStatePropertyAll(Color(0xff39CBC6))
+                                ),
+                                onPressed: (){
+                                  state.cartItems.contains(cartItemEntity)? null : cartBloc.add(AddMedicamentToCartEvent(cartItemEntity));
+                                },
+                                child: Text( state.cartItems.contains(cartItemEntity)?"In cart" : "Add", style: GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14))
+                              );
+                            }
                           ),
                         )
                       ],

@@ -30,12 +30,9 @@ class _SliderBannerState extends State<SliderBanner> {
           items: [1,2,3,4,5].map((i) {
             return Builder(
               builder: (BuildContext context) {
-                return Container(
+                return SizedBox(
                     width: MediaQuery.of(context).size.width-40.0,
                     height: 180,
-                    decoration: BoxDecoration(
-
-                    ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Image.asset(

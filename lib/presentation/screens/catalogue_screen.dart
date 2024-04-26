@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medical_prescription/core/util/theme/Colors.dart';
-import 'package:medical_prescription/presentation/bloc/catalogue_bloc/catalogue_bloc.dart';
 import '../app.dart';
 import '../pages/search_page.dart';
 
@@ -56,7 +55,8 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
           style: GoogleFonts.montserrat(
             textStyle: const TextStyle(
               fontSize: 16.0,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w700,
+              color: Colors.white
             )
           )
         ),
@@ -69,7 +69,7 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
           Container(
             height: 170.0,
             width: MediaQuery.of(context).size.width,
-            color: const Color(0xff07BEB8),
+            color: const Color(0xff199A8E),
             padding: const EdgeInsets.only(bottom: 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,

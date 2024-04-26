@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:medical_prescription/presentation/screens/prescription_screen.dart';
 
 class SliderPrescriptions extends StatelessWidget {
   const SliderPrescriptions({Key? key}) : super(key: key);
@@ -21,7 +23,7 @@ class SliderPrescriptions extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                 border: Border.all(width: 1.0, color: Colors.grey),
                 color: Colors.white,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                       blurRadius: 2,
                       color: Color(0xffB1B0B0)
@@ -65,11 +67,17 @@ class SliderPrescriptions extends StatelessWidget {
                         ],
                       ),
                       ElevatedButton(
-                        onPressed: (){},
-                        child: const Text("Open"),
+                        onPressed: (){
+                          Navigator.push(context, CupertinoPageRoute(builder: (context) => const PrescriptionScreen()));
+                        },
                         style: ButtonStyle(
-                          surfaceTintColor: MaterialStatePropertyAll(Colors.black),
+                          surfaceTintColor: const MaterialStatePropertyAll(Colors.black),
+                          backgroundColor: const MaterialStatePropertyAll(Color(0xff199A8E)),
+                          foregroundColor: const MaterialStatePropertyAll(Colors.white),
+                          overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+                          textStyle: MaterialStatePropertyAll(GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 14)),
                         ),
+                        child: const Text("Open"),
                       )
                     ],
                   )

@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:medical_prescription/domain/entities/cartItem.dart';
-import 'package:medical_prescription/domain/entities/medicament.dart';
 import 'package:meta/meta.dart';
 
 part 'cart_event.dart';
@@ -28,13 +27,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
   Future<void> _onChangeItemCount(ChangeItemCount event, Emitter<CartState> emit) async {
     emit(state.copyOf(cartStateType: CartStateType.inProgress));
-    medicament.map((med) {
+    List<CartItemEntity> updatedMedicament = medicament.map((med) {
       if(med == event.cartItemEntity){
-        print(med.itemCount);
         med.itemCount = event.itemCount;
       }
-      print(1);
-    });
-    emit(state.copyOf(cartItems: medicament, cartStateType: CartStateType.success));
+      return med;
+    }).toList();
+    emit(state.copyOf(cartItems: updatedMedicament, cartStateType: CartStateType.success));
   }
 }

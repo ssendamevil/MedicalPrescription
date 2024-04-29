@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:medical_prescription/presentation/screens/home_screen.dart';
 import 'package:medical_prescription/presentation/screens/map_screen.dart';
 
-final ValueNotifier homePageIndex = ValueNotifier(1);
+final ValueNotifier homePageIndex = ValueNotifier(0);
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
   final List<Widget> screens = [
-    const HomeScreen(),
-    const MapScreen()
+    const HomeScreen()
   ];
 
   @override

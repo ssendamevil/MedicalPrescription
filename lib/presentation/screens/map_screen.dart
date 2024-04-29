@@ -35,7 +35,7 @@ class _MapScreenState extends State<MapScreen> {
           ),
           leading: IconButton(
             onPressed: (){
-              homePageIndex.value = 0;
+              Navigator.pop(context);
             },
             icon: const Icon(Iconsax.arrow_left)),
           title: Text("Nearest pharmacies", style: Theme.of(context).textTheme.headlineSmall,),

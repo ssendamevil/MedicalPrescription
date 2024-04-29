@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:medical_prescription/presentation/screens/map_screen.dart';
 import 'package:medical_prescription/presentation/widgets/cart_page_item.dart';
 
 import '../bloc/cart_bloc/cart_bloc.dart';
@@ -93,7 +94,16 @@ class _CartScreenState extends State<CartScreen> {
                         ],
                       ),
                       ElevatedButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation1, animation2) => MapScreen(),
+                              transitionDuration: Duration.zero,
+                              reverseTransitionDuration: Duration.zero,
+                            ),
+                          );
+                        },
                         style: ButtonStyle(
                           overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                           foregroundColor: const MaterialStatePropertyAll(Colors.black),

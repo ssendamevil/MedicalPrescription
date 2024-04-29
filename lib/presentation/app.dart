@@ -15,6 +15,7 @@ import 'package:medical_prescription/presentation/pages/search_page.dart';
 import 'bloc/cart_bloc/cart_bloc.dart';
 
 final ValueNotifier selectedIndexGlobal = ValueNotifier(0);
+final ValueNotifier isSigned = ValueNotifier(true);
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
@@ -53,12 +54,15 @@ class _AppViewState extends State<AppView> {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: _checkIfAuth()
+      home: ValueListenableBuilder(
+        valueListenable: isSigned,
+          builder: (context,val, child) => _checkIfAuth()
+      )
     );
   }
 
   Widget _checkIfAuth(){
-    if(false){
+    if(!isSigned.value){
       return const AuthPage();
     }else{
       return ValueListenableBuilder(

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "750080310088",
+    "project_id": "medicalprescription-53cbf",
+    "storage_bucket": "medicalprescription-53cbf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750080310088:android:6285d6c0b1e035d47c917d",
+        "android_client_info": {
+          "package_name": "com.example.medical_prescription"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtVLFz-Eqk3Q2UzLTXg19D8mQZlXtQk7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

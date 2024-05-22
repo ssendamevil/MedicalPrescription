@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:medical_prescription/domain/entities/cartItem.dart';
@@ -14,6 +13,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   CartBloc() : super(const CartState()) {
     on<AddMedicamentToCartEvent>(_onAddMedicamentToCart);
     on<ChangeItemCount>(_onChangeItemCount);
+    on<RemoveMedicamentToCartEvent>(_onRemoveMedicamentFromCart);
   }
 
   Future<void> _onAddMedicamentToCart(AddMedicamentToCartEvent event, Emitter<CartState> emit) async {
@@ -34,5 +34,11 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       return med;
     }).toList();
     emit(state.copyOf(cartItems: updatedMedicament, cartStateType: CartStateType.success));
+  }
+
+  Future<void> _onRemoveMedicamentFromCart(RemoveMedicamentToCartEvent event, Emitter<CartState> emit) async {
+    emit(state.copyOf(cartStateType: CartStateType.inProgress));
+    medicament.remove(event.cartItemEntity);
+    emit(state.copyOf(cartItems: medicament, cartStateType: CartStateType.success));
   }
 }

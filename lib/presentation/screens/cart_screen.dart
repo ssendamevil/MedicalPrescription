@@ -39,7 +39,7 @@ class _CartScreenState extends State<CartScreen> {
             ),
             scrolledUnderElevation: 0,
             title: const Text(
-              "Cart"
+              "Cart",
             ),
             centerTitle: true,
           ),
@@ -98,7 +98,7 @@ class _CartScreenState extends State<CartScreen> {
                           Navigator.push(
                             context,
                             PageRouteBuilder(
-                              pageBuilder: (context, animation1, animation2) => MapScreen(),
+                              pageBuilder: (context, animation1, animation2) => const MapScreen(),
                               transitionDuration: Duration.zero,
                               reverseTransitionDuration: Duration.zero,
                             ),

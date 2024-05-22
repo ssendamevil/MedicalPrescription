@@ -1,11 +1,8 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:medical_prescription/presentation/pages/home_page.dart';
-import 'package:yandex_mapkit/yandex_mapkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
-import '../../data/models/map_point.dart';
-import 'map/AppLatLang.dart';
-import 'map/clusterized_icon_painter.dart';
+import 'package:yandex_maps_mapkit/mapkit.dart';
+import 'package:yandex_maps_mapkit/yandex_map.dart';
 
 
 class MapScreen extends StatefulWidget {
@@ -16,14 +13,7 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  late final YandexMapController _mapController;
-  var _mapZoom = 0.0;
-
-  @override
-  void dispose() {
-    _mapController.dispose();
-    super.dispose();
-  }
+  late MapWindow _mapWindow;
 
   @override
   Widget build(BuildContext context) {
@@ -34,41 +24,32 @@ class _MapScreenState extends State<MapScreen> {
               bottom: BorderSide(color: Colors.black12, width: 1)
           ),
           leading: IconButton(
+            icon: const Icon(Iconsax.arrow_left),
             onPressed: (){
               Navigator.pop(context);
             },
-            icon: const Icon(Iconsax.arrow_left)),
-          title: Text("Nearest pharmacies", style: Theme.of(context).textTheme.headlineSmall,),
+          ),
+          title: Text("Nearest pharmacies", style: GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w700),),
           centerTitle: true,
         ),
         body: YandexMap(
-          onMapCreated: (controller) async{
-            _mapController = controller;
-            await _mapController.moveCamera(
-              CameraUpdate.newCameraPosition(
-                 CameraPosition(
-                  target: Point(latitude: AstanaLocation().lat, longitude: AstanaLocation().long),
-                  zoom: 11,
-                ),
-              ),
-            );
-          },
-          onCameraPositionChanged: (cameraPosition, _, __) {
-            setState(() {
-              _mapZoom = cameraPosition.zoom;
-            });
-          },
-          mapObjects: [
-            _getClusterizedCollection(
-              placemarks: _getPlacemarkObjects(context),
-            ),
-          ],
+          onMapCreated: (mapWindow) {
+            _mapWindow = mapWindow;
+            // _mapWindow?.map.move(
+            //     const CameraPosition(
+            //         Point(latitude: 55.751225, longitude: 37.629540),
+            //         zoom: 17.0,
+            //         azimuth: 150.0,
+            //         tilt: 30.0
+            //     )
+            // );
+            },
         ),
       ),
     );
   }
 
-  ClusterizedPlacemarkCollection _getClusterizedCollection({
+  /*ClusterizedPlacemarkCollection _getClusterizedCollection({
     required List<PlacemarkMapObject> placemarks,}){
     return ClusterizedPlacemarkCollection(
       mapId: const MapObjectId('clusterized-1'),
@@ -123,5 +104,5 @@ class _MapScreenState extends State<MapScreen> {
         ))
       )
     ).toList();
-  }
+  }*/
 }

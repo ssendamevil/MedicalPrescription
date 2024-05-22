@@ -18,8 +18,8 @@ class ChangeItemCount extends CartEvent{
   const ChangeItemCount(this.cartItemEntity, this.itemCount);
 }
 
-class DeleteMedicamentToCartEvent extends CartEvent{
+class RemoveMedicamentToCartEvent extends CartEvent{
   final CartItemEntity cartItemEntity;
 
-  const DeleteMedicamentToCartEvent(this.cartItemEntity);
+  const RemoveMedicamentToCartEvent(this.cartItemEntity);
 }

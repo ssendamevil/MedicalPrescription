@@ -364,7 +364,6 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
           ),
           Expanded(
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20,),
               width: MediaQuery.of(context).size.width,
               color: const Color(0xffF0F0F0),
               child: ListView(

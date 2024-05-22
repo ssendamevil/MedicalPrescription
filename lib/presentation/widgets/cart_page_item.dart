@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -96,7 +97,7 @@ class _CartPageItemState extends State<CartPageItem> {
                             Text("from 354₸", style: Theme.of(context).textTheme.titleLarge,),
                             SizedBox(
                               height: 40,
-                              width: 120,
+                              width: 130,
                               child: BlocBuilder<CartBloc, CartState>(
                               builder: (context, state) {
                                   return Row(
@@ -116,23 +117,99 @@ class _CartPageItemState extends State<CartPageItem> {
                                           ),
                                         ) :
                                         IconButton(
-                                          onPressed: () {},
-                                          icon: const Icon(Iconsax.trash, size: 20, color: Colors.grey),
+                                          onPressed: () {
+                                            showModalBottomSheet(
+                                                context: context,
+                                                builder: ((context){
+                                                  return Container(
+                                                    height: 180,
+                                                    width: MediaQuery.of(context).size.width,
+                                                    padding: const EdgeInsets.only(top: 30, bottom: 30, right: 15, left: 15),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(10),
+                                                    ),
+                                                    child: Column(
+                                                      children: [
+                                                        Text("Do you want to remove a product?",
+                                                          style: GoogleFonts.montserrat(
+                                                            fontWeight: FontWeight.w600,
+                                                            fontSize: 18.0
+                                                          ),
+                                                        ),
+                                                        const SizedBox(height: 20,),
+                                                        Row(
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            SizedBox(
+                                                              width: 170,
+                                                              height: 56,
+                                                              child: OutlinedButton(
+                                                                onPressed: (){Navigator.of(context).pop();},
+                                                                style: ButtonStyle(
+                                                                  foregroundColor: const MaterialStatePropertyAll(Color(0xff199A8E)),
+                                                                  side: const MaterialStatePropertyAll(BorderSide(
+                                                                    color: Color(0xff199A8E),width: 2.0
+                                                                  )),
+                                                                  textStyle: MaterialStatePropertyAll(GoogleFonts.montserrat(
+                                                                    fontSize: 16,
+                                                                    fontWeight: FontWeight.w500
+                                                                  )),
+                                                                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                                                                      borderRadius: BorderRadius.circular(10)
+                                                                  ))
+                                                                ),
+                                                                child: const Text("Cancel"),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 170,
+                                                              height: 56,
+                                                              child: ElevatedButton(
+                                                                onPressed: (){
+                                                                  cartBloc.add(RemoveMedicamentToCartEvent(widget.cartItemEntity));
+                                                                  Navigator.of(context).pop();
+                                                                },
+                                                                style: ButtonStyle(
+                                                                  foregroundColor: const MaterialStatePropertyAll(Colors.white),
+                                                                  backgroundColor: const MaterialStatePropertyAll(Colors.red),
+                                                                  textStyle: MaterialStatePropertyAll(GoogleFonts.montserrat(
+                                                                      fontSize: 16,
+                                                                      fontWeight: FontWeight.w500
+                                                                  )),
+                                                                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                                                                    borderRadius: BorderRadius.circular(10)
+                                                                  ))
+                                                                ),
+                                                                child: const Text("Remove"),
+                                                              ),
+                                                            )
+                                                          ],
+                                                        )
+                                                      ],
+                                                    )
+                                                  );
+                                                })
+                                            );
+                                          },
+                                          icon: const Icon(Iconsax.trash, size: 20, color: Colors.red),
                                           style: const ButtonStyle(
-                                              side: MaterialStatePropertyAll(BorderSide(color:Colors.grey)),
+                                              side: MaterialStatePropertyAll(BorderSide(color:Colors.red)),
                                               surfaceTintColor: MaterialStatePropertyAll(Colors.transparent),
                                               overlayColor: MaterialStatePropertyAll(Colors.transparent)
                                           ),
                                         ),
-                                      const SizedBox(width: 2,),
-                                      Text(
-                                        "${widget.cartItemEntity.itemCount}",
-                                        style: const TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w600
+                                      SizedBox(
+                                        width: 33,
+                                        child: Center(
+                                          child: Text(
+                                            "${widget.cartItemEntity.itemCount}",
+                                            style: const TextStyle(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w600
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                      const SizedBox(width: 2,),
                                       IconButton(
                                         style: const ButtonStyle(
                                             side: MaterialStatePropertyAll(BorderSide(color: Colors.black)),

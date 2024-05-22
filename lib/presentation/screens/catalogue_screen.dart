@@ -54,8 +54,8 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
           title,
           style: GoogleFonts.montserrat(
             textStyle: const TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.w700,
+              // fontSize: 18.0,
+              // fontWeight: FontWeight.w700,
               color: Colors.white
             )
           )

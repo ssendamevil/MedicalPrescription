@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import '../pages/appointment_page.dart';
 
 class PrescriptionScreen extends StatefulWidget {
   const PrescriptionScreen({Key? key}) : super(key: key);
@@ -30,16 +29,15 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
         ),
         title: Text(
           "Prescription",
-          style: Theme.of(context).textTheme.headlineSmall
         ),
-        backgroundColor: const Color(0xff07BEB8),
+        backgroundColor: const Color(0xff199A8E),
         centerTitle: true,
         actions: [
           IconButton(
             onPressed: (){
               showModalBottomSheet(
                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(0.0)),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
                 ),
                 context: context,
                 builder: (((context){
@@ -85,7 +83,7 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
           Container(
             height: 120.0,
             width: MediaQuery.of(context).size.width,
-            color: const Color(0xff07BEB8),
+            color: const Color(0xff199A8E),
             child: Column(
               children: [
                 const Text("№1784554884"),
@@ -177,16 +175,17 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                                 Center(child:
                                   SizedBox(
                                     width: 270,
+                                    height: 50,
                                     child: ElevatedButton(
                                       onPressed: (){},
                                       style: ButtonStyle(
                                         surfaceTintColor: const MaterialStatePropertyAll<Color>(Colors.black),
                                         shadowColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
-                                        backgroundColor: const MaterialStatePropertyAll<Color>(Color(0xff07BEB8)),
+                                        backgroundColor: const MaterialStatePropertyAll<Color>(Color(0xff199A8E)),
                                         overlayColor: const MaterialStatePropertyAll<Color>(Colors.transparent),
                                         shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)))
                                       ),
-                                      child: Text("Buy at 899",
+                                      child: Text("Buy at 899₸",
                                         style: GoogleFonts.montserrat(
                                           textStyle: Theme.of(context).textTheme.bodyMedium,
                                           color: Colors.white

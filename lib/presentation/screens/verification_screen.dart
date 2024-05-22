@@ -170,7 +170,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       elevation: const MaterialStatePropertyAll(0),
                       foregroundColor: const MaterialStatePropertyAll(Colors.black),
                       shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                      shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)))
+                      shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
                   ),
                   onPressed: (){},
                   child: Text(

@@ -44,17 +44,17 @@ class _AuthScreenState extends State<AuthScreen> {
             height: 54,
             child: ElevatedButton(
               style: ButtonStyle(
-                backgroundColor: const MaterialStatePropertyAll(Color(0xff07BEB8)),
+                backgroundColor: const MaterialStatePropertyAll(Color(0xff199A8E)),
                 overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                 elevation: const MaterialStatePropertyAll(0),
                 foregroundColor: const MaterialStatePropertyAll(Colors.white),
                 shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)))
+                shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
               ),
               onPressed: (){},
               child: Text(
                 "Login",
-                style: GoogleFonts.montserrat(fontSize:18, fontWeight: FontWeight.w500),
+                style: GoogleFonts.montserrat(fontSize:16, fontWeight: FontWeight.w500),
               )
             ),
           ),
@@ -68,16 +68,16 @@ class _AuthScreenState extends State<AuthScreen> {
                   elevation: const MaterialStatePropertyAll(0),
                   overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                   foregroundColor: const MaterialStatePropertyAll(Color(0xff04726E)),
-                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18))),
+                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                   shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                  side: const MaterialStatePropertyAll(BorderSide(color: Color(0xff069893)))
+                  side: const MaterialStatePropertyAll(BorderSide(color: Color(0xff069893), width: 2))
               ),
               onPressed: (){
                 Navigator.push(context, CupertinoPageRoute(builder: (context) => SignUpScreen()));
               },
               child: Text(
                 "Sign Up",
-                style: GoogleFonts.montserrat(fontSize:18, fontWeight: FontWeight.w500),
+                style: GoogleFonts.montserrat(fontSize:16, fontWeight: FontWeight.w500),
               )
             ),
           )

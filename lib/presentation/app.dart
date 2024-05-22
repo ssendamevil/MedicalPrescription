@@ -46,7 +46,8 @@ class AppView extends StatefulWidget {
 }
 
 class _AppViewState extends State<AppView> {
-
+  late CartBloc cartBloc;
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -74,10 +75,10 @@ class _AppViewState extends State<AppView> {
               SearchPage(),
               const AppointmentPage(),
               const CartPage(),
-              const ProfilePage(),
+              ProfilePage(),
             ][selectedIndexGlobal.value],
             bottomNavigationBar: Container(
-              height: 60,
+              height: 65,
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topRight: Radius.circular(15), topLeft: Radius.circular(15)),
@@ -121,26 +122,62 @@ class _AppViewState extends State<AppView> {
                   ),
                   iconSize: 20,
                   elevation: 0,
-                  items: const <BottomNavigationBarItem>[
-                    BottomNavigationBarItem(
-                        icon: Icon(Iconsax.home),
-                        label: 'Home'
+                  items: <BottomNavigationBarItem>[
+                    const BottomNavigationBarItem(
+                      icon: SizedBox(height: 24, child: Icon(Iconsax.home)),
+                      label: 'Home'
+                    ),
+                    const BottomNavigationBarItem(
+                      icon: SizedBox(height: 24,width: 70, child: Icon(Iconsax.search_normal)),
+                      label: 'Search'
+                    ),
+                    const BottomNavigationBarItem(
+                      icon: SizedBox(height: 24, child: Icon(Iconsax.document)),
+                      label: 'Appointment'
                     ),
                     BottomNavigationBarItem(
-                        icon: Icon(Iconsax.search_normal),
-                        label: 'Search'
+                      icon: BlocBuilder<CartBloc, CartState>(
+                        builder: (context, state) {
+                          return SizedBox(
+                            width: 40,
+                            height: 24,
+                            child: Stack(
+                              children: [
+                                const Align(
+                                  alignment: Alignment.center,
+                                  child: Icon(Iconsax.bag)
+                                ),
+                                state.cartItems.isNotEmpty?
+                                Positioned(
+                                  top: 0,
+                                  right: 0,
+                                  child: Container(
+                                    width: 17,
+                                    height: 17,
+                                    decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      borderRadius: BorderRadius.circular(50)
+                                    ),
+                                    child: Text('${state.cartItems.length}',
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.montserrat(
+                                        color: Colors.white,
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w600
+                                      ),
+                                    ),
+                                  ),
+                                ) : Container()
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                      label: 'Cart'
                     ),
-                    BottomNavigationBarItem(
-                        icon: Icon(Iconsax.document),
-                        label: 'Appointment'
-                    ),
-                    BottomNavigationBarItem(
-                        icon: Icon(Iconsax.bag),
-                        label: 'Cart'
-                    ),
-                    BottomNavigationBarItem(
-                        icon: Icon(Iconsax.profile_circle),
-                        label: 'Profile'
+                    const BottomNavigationBarItem(
+                      icon: SizedBox(height: 24, child: Icon(Iconsax.profile_circle)),
+                      label: 'Profile'
                     )
                   ],
                 ),

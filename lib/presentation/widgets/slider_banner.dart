@@ -19,7 +19,7 @@ class _SliderBannerState extends State<SliderBanner> {
       children: [
         CarouselSlider(
           options: CarouselOptions(
-              height: 180.0,
+              height: 200.0,
               viewportFraction: 1,
               onPageChanged: (index, reason){
                 setState((){
@@ -30,9 +30,25 @@ class _SliderBannerState extends State<SliderBanner> {
           items: [1,2,3,4,5].map((i) {
             return Builder(
               builder: (BuildContext context) {
-                return SizedBox(
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
                     width: MediaQuery.of(context).size.width-40.0,
                     height: 180,
+                    decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(4, 4),
+                            color: Color(0xffE7E7E7),
+                            blurRadius: 3
+                        ),
+                        BoxShadow(
+                            offset: Offset(-4, -4),
+                            color: Color(0xffE7E7E7),
+                            blurRadius: 3
+                        ),
+                      ],
+                    ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Image.asset(
@@ -40,6 +56,7 @@ class _SliderBannerState extends State<SliderBanner> {
                         fit: BoxFit.fill,
                       ),
                     ),
+                  ),
                 );
               },
             );

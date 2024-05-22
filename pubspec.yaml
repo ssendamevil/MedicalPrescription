@@ -48,9 +48,10 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   qr_code_scanner: ^1.0.1
   qr_flutter:
-  yandex_mapkit: ^3.4.0
   geolocator: ^10.1.0
   persistent_bottom_nav_bar: ^5.0.2
+  yandex_maps_mapkit:
+    version: ^4.6.1-beta1
 
 dev_dependencies:
   flutter_test:

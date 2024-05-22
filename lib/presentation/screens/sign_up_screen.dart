@@ -31,7 +31,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             const SizedBox(height: 40,),
             Container(
-                margin: EdgeInsets.symmetric(horizontal: 30),
+                margin: const EdgeInsets.symmetric(horizontal: 30),
                 child: TextFormField(
                   autofocus: true,
                   style: GoogleFonts.montserrat(
@@ -52,31 +52,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ],
                 )
             ),
-            SizedBox(height: 80,),
-            SizedBox(
+            const SizedBox(height: 80,),
+            const SizedBox(
               width: 300,
               child: Text("By clicking 'Send Code', I accept Terms of Service and Privacy Policy",
                 textAlign: TextAlign.center,
               )),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             SizedBox(
               width: 330,
               height: 54,
               child: ElevatedButton(
                   style: ButtonStyle(
-                      backgroundColor: const MaterialStatePropertyAll(Color(0xff07BEB8)),
+                      backgroundColor: const MaterialStatePropertyAll(Color(0xff199A8E)),
                       overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                       elevation: const MaterialStatePropertyAll(0),
                       foregroundColor: const MaterialStatePropertyAll(Colors.white),
                       shadowColor: const MaterialStatePropertyAll(Colors.transparent),
-                      shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)))
+                      shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
                   ),
                   onPressed: (){
-                      Navigator.push(context, CupertinoPageRoute(builder: (context) => VerificationScreen()));
+                      Navigator.push(context, CupertinoPageRoute(builder: (context) => const VerificationScreen()));
                   },
                   child: Text(
                     "Send code",
-                    style: GoogleFonts.montserrat(fontSize:18, fontWeight: FontWeight.w400),
+                    style: GoogleFonts.montserrat(fontSize:16, fontWeight: FontWeight.w400),
                   )
               ),
             ),

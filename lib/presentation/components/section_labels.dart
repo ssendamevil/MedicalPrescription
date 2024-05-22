@@ -1,7 +1,9 @@
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 
-Widget sectionLabels(BuildContext context, String text, bool hasButton){
+import "../app.dart";
+
+Widget sectionLabels(BuildContext context, String text, bool hasButton, int index){
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 20.0),
     child: Row(
@@ -16,7 +18,9 @@ Widget sectionLabels(BuildContext context, String text, bool hasButton){
         ),
         hasButton ?
         TextButton(
-          onPressed: (){},
+          onPressed: (){
+            selectedIndexGlobal.value = index;
+          },
           style: const ButtonStyle(
               foregroundColor: MaterialStatePropertyAll(Colors.black),
               overlayColor: MaterialStatePropertyAll(Colors.transparent)

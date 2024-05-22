@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 import '../../core/util/theme/Colors.dart';
 import '../app.dart';
@@ -78,30 +77,19 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: SizedBox(
           width: MediaQuery.of(context).size.width,
-          // decoration: BoxDecoration(
-          //     gradient: LinearGradient(
-          //         begin: Alignment.topCenter,
-          //         end: Alignment.bottomCenter,
-          //         colors: <Color>[
-          //           Color(0xff069893),
-          //           Color(0xffffffff)
-          //         ],
-          //         tileMode: TileMode.mirror
-          //     )
-          // ),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 const SizedBox(height: 15,),
                 const SliderBanner(),
                 const SizedBox(height: 15,),
-                sectionLabels(context, "My last prescriptions", true),
+                sectionLabels(context, "My last prescriptions", true, 2),
                 const SliderPrescriptions(),
                 const SizedBox(height: 20,),
-                sectionLabels(context, "Recent Orders", true),
+                sectionLabels(context, "Recent Orders", true, 0),
                 const RecentOrderSlider(),
                 const SizedBox(height: 40,),
-                sectionLabels(context, "Map of pharmacies", false),
+                sectionLabels(context, "Map of pharmacies", false, 0),
                 const SizedBox(height: 20),
                 Container(
                   height: 150,
@@ -109,15 +97,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
-                  child: const ClipRRect(
-                    borderRadius: BorderRadius.only(
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
                       bottomRight: Radius.circular(10),
                       bottomLeft: Radius.circular(10),
                     ),
-                    child: YandexMap(
-                    ),
+                    child: Container()
                   ),
                 ),
                 const SizedBox(height: 40),

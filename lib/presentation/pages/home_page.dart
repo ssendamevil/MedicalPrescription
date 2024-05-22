@@ -9,7 +9,8 @@ class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
   final List<Widget> screens = [
-    const HomeScreen()
+    const HomeScreen(),
+    MapScreen()
   ];
 
   @override

@@ -19,7 +19,7 @@ class _SliderBannerState extends State<SliderBanner> {
       children: [
         CarouselSlider(
           options: CarouselOptions(
-              height: 200.0,
+              height: 215.0,
               viewportFraction: 1,
               onPageChanged: (index, reason){
                 setState((){
@@ -31,21 +31,21 @@ class _SliderBannerState extends State<SliderBanner> {
             return Builder(
               builder: (BuildContext context) {
                 return Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(15.0),
                   child: Container(
                     width: MediaQuery.of(context).size.width-40.0,
                     height: 180,
                     decoration: const BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                            offset: Offset(4, 4),
-                            color: Color(0xffE7E7E7),
-                            blurRadius: 3
+                            offset: Offset(2, 2),
+                            color: Color(0xffe3e3e3),
+                            blurRadius: 13
                         ),
                         BoxShadow(
-                            offset: Offset(-4, -4),
-                            color: Color(0xffE7E7E7),
-                            blurRadius: 3
+                            offset: Offset(-2, 1),
+                            color: Color(0xffe3e3e3),
+                            blurRadius: 13
                         ),
                       ],
                     ),

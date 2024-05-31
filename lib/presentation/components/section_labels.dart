@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
-
-import "../app.dart";
+import "package:medical_prescription/presentation/pages/patient/profile_page.dart";
+import "package:medical_prescription/presentation/screens/patient/patient_app.dart";
 
 Widget sectionLabels(BuildContext context, String text, bool hasButton, int index){
   return Padding(
@@ -20,6 +20,9 @@ Widget sectionLabels(BuildContext context, String text, bool hasButton, int inde
         TextButton(
           onPressed: (){
             selectedIndexGlobal.value = index;
+            if(index == 4){
+              profilePageIndex.value = 3;
+            }
           },
           style: const ButtonStyle(
               foregroundColor: MaterialStatePropertyAll(Colors.black),

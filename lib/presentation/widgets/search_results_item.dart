@@ -6,10 +6,13 @@ import 'package:iconsax/iconsax.dart';
 import 'package:medical_prescription/domain/entities/cartItem.dart';
 import 'package:medical_prescription/domain/entities/medicament.dart';
 import 'package:medical_prescription/presentation/bloc/cart_bloc/cart_bloc.dart';
-import 'package:medical_prescription/presentation/screens/medicament_screen.dart';
+import 'package:medical_prescription/presentation/screens/patient/medicament_screen.dart';
 
 class SearchResultsItem extends StatefulWidget {
-  const SearchResultsItem({Key? key}) : super(key: key);
+  const SearchResultsItem({Key? key, required this.name, required this.link}) : super(key: key);
+
+  final String name;
+  final String link;
 
   @override
   State<SearchResultsItem> createState() => _SearchResultsItemState();
@@ -39,14 +42,9 @@ class _SearchResultsItemState extends State<SearchResultsItem> {
           borderRadius: BorderRadius.circular(15),
           boxShadow: const [
             BoxShadow(
-                blurRadius: 4,
-                offset: Offset(-10, -10),
-                color: Color(0xffF9F9F9)
-            ),
-            BoxShadow(
-              blurRadius: 10,
-              offset: Offset(10, 10),
-              color: Color(0xffF9F9F9)
+                offset: Offset(0, 1.0),
+                blurRadius: 5,
+                color: Color(0xffB1B0B0)
             )
           ]
         ),
@@ -68,7 +66,7 @@ class _SearchResultsItemState extends State<SearchResultsItem> {
             children: [
               Expanded(
                 flex: 1,
-                child: Image.network("https://st.europharma.kz/cache/product/2135/x248_5f6874ea35695.png"),
+                child: Image.network(widget.link),
               ),
               Expanded(
                 flex: 3,
@@ -80,7 +78,7 @@ class _SearchResultsItemState extends State<SearchResultsItem> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Но-шпа", style: Theme.of(context).textTheme.headlineSmall,),
+                          Text(widget.name, style: Theme.of(context).textTheme.headlineSmall,),
                           const SizedBox(height: 4,),
                           const Row(
                             children: [
@@ -95,15 +93,15 @@ class _SearchResultsItemState extends State<SearchResultsItem> {
                             ],
                           ),
                           const SizedBox(height: 5,),
-                          Text("Flacon, 0.5g",style: Theme.of(context).textTheme.bodyLarge,),
+                          Text("№30 капс",style: Theme.of(context).textTheme.bodyLarge,),
                           const SizedBox(height: 5,),
-                          Text("PJSC Sintez Joint Stock Kurgan, Russia",style: Theme.of(context).textTheme.bodyLarge,),
+                          Text("Claus Marsh, США",style: Theme.of(context).textTheme.bodyLarge,),
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("from 354₸", style: Theme.of(context).textTheme.titleLarge,),
+                          Text("from 5 635₸", style: Theme.of(context).textTheme.titleLarge,),
                           SizedBox(
                             height: 37,
                             width: 100,

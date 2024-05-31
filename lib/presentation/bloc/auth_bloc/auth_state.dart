@@ -1,6 +1,31 @@
 part of 'auth_bloc.dart';
 
-@immutable
-abstract class AuthState {}
+enum AuthStateType {initial, isLoading, success, failure}
+enum SignedType {signed, notSigned}
 
-class AuthInitial extends AuthState {}
+class AuthState extends Equatable{
+  final AuthStateType stateType;
+  final UserEntity user;
+  final SignedType signedType;
+
+  const AuthState({
+    this.signedType = SignedType.notSigned,
+    this.stateType = AuthStateType.initial,
+    this.user = const UserEntity(name: '', iin: '', token: '')
+  });
+
+  AuthState copyWith({
+    AuthStateType? stateType,
+    UserEntity? user,
+    SignedType? signedType
+  }){
+    return AuthState(
+      stateType: stateType ?? this.stateType,
+      user: user ?? this.user,
+      signedType: signedType ?? this.signedType
+    );
+  }
+
+  @override
+  List<Object?> get props => [stateType, signedType];
+}

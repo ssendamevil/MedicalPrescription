@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:medical_prescription/core/util/theme/AppTheme.dart';
+import 'package:medical_prescription/data/data_sources/local/hive/box_helper.dart';
+import 'package:medical_prescription/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:medical_prescription/presentation/bloc/catalogue_bloc/catalogue_bloc.dart';
+import 'package:medical_prescription/presentation/bloc/prescription/prescription_bloc.dart';
 import 'package:medical_prescription/presentation/bloc/search_bloc/search_bloc.dart';
-import 'package:medical_prescription/presentation/pages/appointment_page.dart';
-import 'package:medical_prescription/presentation/pages/auth_page.dart';
-import 'package:medical_prescription/presentation/pages/cart_page.dart';
-import 'package:medical_prescription/presentation/pages/home_page.dart';
-import 'package:medical_prescription/presentation/pages/profile_page.dart';
-import 'package:medical_prescription/presentation/pages/search_page.dart';
+import 'package:medical_prescription/presentation/pages/patient/auth_page.dart';
+import 'package:medical_prescription/presentation/screens/patient/patient_app.dart';
+import 'package:medical_prescription/presentation/screens/pharmacy/pharmacy_app.dart';
 
+import '../injection_container.dart';
 import 'bloc/cart_bloc/cart_bloc.dart';
 
-final ValueNotifier selectedIndexGlobal = ValueNotifier(0);
-final ValueNotifier isSigned = ValueNotifier(true);
+final ValueNotifier selectedIndexGlobalPharmacy = ValueNotifier(0);
+
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
@@ -23,6 +22,12 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<AuthBloc>(
+            create: (context) => AuthBloc(sl())
+        ),
+        BlocProvider<PrescriptionBloc>(
+            create: (context) => PrescriptionBloc(sl())
+        ),
         BlocProvider<SearchBloc>(
             create: (context) => SearchBloc()
         ),
@@ -47,6 +52,14 @@ class AppView extends StatefulWidget {
 
 class _AppViewState extends State<AppView> {
   late CartBloc cartBloc;
+  late AuthBloc authBloc;
+  final role = "Pharmacis";
+  
+  @override
+  void initState() {
+    authBloc = context.read<AuthBloc>();
+    super.initState();
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -55,138 +68,32 @@ class _AppViewState extends State<AppView> {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: ValueListenableBuilder(
-        valueListenable: isSigned,
-          builder: (context,val, child) => _checkIfAuth()
+      home: BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, state) {
+          if(BoxHelper.hasToken()) {
+            return Stack(
+              children: [
+                role=="Pharmacist"? const PharmacyApp() : const PatientApp(),
+                state.stateType == AuthStateType.isLoading ?
+                  const Center(
+                    child: CircularProgressIndicator(),
+                  ): Container()
+              ],
+            );
+          }else{
+            return Stack(
+              children: [
+                AuthPage(),
+                state.stateType == AuthStateType.isLoading ?
+                  const Center(
+                    child: CircularProgressIndicator(),
+                  ): Container()
+              ],
+            );
+          }
+        },
       )
     );
-  }
-
-  Widget _checkIfAuth(){
-    if(!isSigned.value){
-      return const AuthPage();
-    }else{
-      return ValueListenableBuilder(
-        valueListenable: selectedIndexGlobal,
-        builder: (context,val, child){
-          return Scaffold(
-            body: <Widget>[
-              HomePage(),
-              SearchPage(),
-              const AppointmentPage(),
-              const CartPage(),
-              ProfilePage(),
-            ][selectedIndexGlobal.value],
-            bottomNavigationBar: Container(
-              height: 65,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(15), topLeft: Radius.circular(15)),
-                boxShadow: [
-                  BoxShadow(color: Color(0xffB1B0B0), spreadRadius: 0, blurRadius: 4),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(15.0),
-                  topRight: Radius.circular(15.0),
-                ),
-                child: BottomNavigationBar(
-                  backgroundColor: Colors.white,
-                  onTap: (int index) {
-                    setState(() {
-                      selectedIndexGlobal.value = index;
-                      if(index == 1){
-                        searchPageScreenIndex.value = 0;
-                      }
-                    });
-                  },
-                  currentIndex: selectedIndexGlobal.value,
-                  selectedItemColor: const Color(0xff04726E),
-                  unselectedItemColor: const Color(0xffA5A5A5),
-                  showUnselectedLabels: true,
-                  type: BottomNavigationBarType.fixed,
-                  selectedLabelStyle: GoogleFonts.montserrat(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 10,
-                      textStyle: const TextStyle(
-                          overflow: TextOverflow.visible
-                      )
-                  ),
-                  unselectedLabelStyle: GoogleFonts.montserrat(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 10,
-                      textStyle: const TextStyle(
-                          overflow: TextOverflow.visible
-                      )
-                  ),
-                  iconSize: 20,
-                  elevation: 0,
-                  items: <BottomNavigationBarItem>[
-                    const BottomNavigationBarItem(
-                      icon: SizedBox(height: 24, child: Icon(Iconsax.home)),
-                      label: 'Home'
-                    ),
-                    const BottomNavigationBarItem(
-                      icon: SizedBox(height: 24,width: 70, child: Icon(Iconsax.search_normal)),
-                      label: 'Search'
-                    ),
-                    const BottomNavigationBarItem(
-                      icon: SizedBox(height: 24, child: Icon(Iconsax.document)),
-                      label: 'Appointment'
-                    ),
-                    BottomNavigationBarItem(
-                      icon: BlocBuilder<CartBloc, CartState>(
-                        builder: (context, state) {
-                          return SizedBox(
-                            width: 40,
-                            height: 24,
-                            child: Stack(
-                              children: [
-                                const Align(
-                                  alignment: Alignment.center,
-                                  child: Icon(Iconsax.bag)
-                                ),
-                                state.cartItems.isNotEmpty?
-                                Positioned(
-                                  top: 0,
-                                  right: 0,
-                                  child: Container(
-                                    width: 17,
-                                    height: 17,
-                                    decoration: BoxDecoration(
-                                      color: Colors.red,
-                                      borderRadius: BorderRadius.circular(50)
-                                    ),
-                                    child: Text('${state.cartItems.length}',
-                                      textAlign: TextAlign.center,
-                                      style: GoogleFonts.montserrat(
-                                        color: Colors.white,
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.w600
-                                      ),
-                                    ),
-                                  ),
-                                ) : Container()
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                      label: 'Cart'
-                    ),
-                    const BottomNavigationBarItem(
-                      icon: SizedBox(height: 24, child: Icon(Iconsax.profile_circle)),
-                      label: 'Profile'
-                    )
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      );
-    }
   }
 }
 

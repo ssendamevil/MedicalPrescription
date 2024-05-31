@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-
-import '../pages/search_page.dart';
+import 'package:medical_prescription/presentation/pages/patient/search_page.dart';
 
 Widget searchResultTab(bool isHistory,String searchResult, BuildContext context){
   return SizedBox(

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medical_prescription/domain/entities/cartItem.dart';
 import 'package:medical_prescription/presentation/bloc/cart_bloc/cart_bloc.dart';
+import 'package:medical_prescription/presentation/screens/patient/medicament_screen.dart';
 
 class CartPageItem extends StatefulWidget {
   const CartPageItem({Key? key, required this.cartItemEntity}) : super(key: key);
@@ -54,7 +55,9 @@ class _CartPageItemState extends State<CartPageItem> {
               backgroundColor: const MaterialStatePropertyAll(Colors.white),
               overlayColor: const MaterialStatePropertyAll(Colors.transparent),
             ),
-            onPressed: (){},
+            onPressed: (){
+              Navigator.of(context).push(CupertinoPageRoute(builder: (context)=> const MedicamentScreen()));
+            },
             child: Row(
               children: [
                 Expanded(

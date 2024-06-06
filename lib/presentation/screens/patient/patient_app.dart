@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:medical_prescription/data/data_sources/local/hive/box_helper.dart';
 import '../../bloc/cart_bloc/cart_bloc.dart';
 import '../../pages/patient/appointment_page.dart';
 import '../../pages/patient/cart_page.dart';
@@ -104,7 +105,7 @@ class _PatientAppState extends State<PatientApp> {
                                       alignment: Alignment.center,
                                       child: Icon(Iconsax.bag)
                                   ),
-                                  state.cartItems.isNotEmpty?
+                                  BoxHelper.getCart()!.isNotEmpty?
                                   Positioned(
                                     top: 0,
                                     right: 0,
@@ -115,7 +116,7 @@ class _PatientAppState extends State<PatientApp> {
                                           color: Colors.red,
                                           borderRadius: BorderRadius.circular(50)
                                       ),
-                                      child: Text('${state.cartItems.length}',
+                                      child: Text('${BoxHelper.getCart()!.length}',
                                         textAlign: TextAlign.center,
                                         style: GoogleFonts.montserrat(
                                             color: Colors.white,

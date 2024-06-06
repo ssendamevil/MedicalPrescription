@@ -48,7 +48,6 @@ dependencies:
   qr_code_scanner: ^1.0.1
   qr_flutter:
   geolocator: ^10.1.0
-  persistent_bottom_nav_bar: ^5.0.2
   yandex_mapkit: ^4.0.2
   equatable: ^2.0.5
   permission_handler: ^11.3.1
@@ -58,6 +57,12 @@ dependencies:
   dotted_decoration: ^2.0.0
   hive_flutter: ^1.1.0
   fresh: ^0.4.1
+  toastification: ^2.0.0
+  shimmer: ^3.0.0
+  uuid: ^4.4.0
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +87,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   assets:

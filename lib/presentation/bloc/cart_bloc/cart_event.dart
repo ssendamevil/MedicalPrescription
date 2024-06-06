@@ -6,20 +6,25 @@ abstract class CartEvent {
 }
 
 class AddMedicamentToCartEvent extends CartEvent{
-  final CartItemEntity cartItemEntity;
+  final CartEntity cartEntity;
 
-  const AddMedicamentToCartEvent(this.cartItemEntity);
+  const AddMedicamentToCartEvent(this.cartEntity);
 }
 
 class ChangeItemCount extends CartEvent{
-  final CartItemEntity cartItemEntity;
+  final CartEntity cartEntity;
   final int itemCount;
 
-  const ChangeItemCount(this.cartItemEntity, this.itemCount);
+  const ChangeItemCount(this.cartEntity, this.itemCount);
 }
 
 class RemoveMedicamentToCartEvent extends CartEvent{
-  final CartItemEntity cartItemEntity;
+  final CartEntity cartEntity;
 
-  const RemoveMedicamentToCartEvent(this.cartItemEntity);
+  const RemoveMedicamentToCartEvent(this.cartEntity);
+}
+
+class GetAllCartItemsEvent extends CartEvent{
+
+  const GetAllCartItemsEvent();
 }

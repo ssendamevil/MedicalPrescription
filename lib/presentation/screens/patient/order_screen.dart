@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medical_prescription/presentation/pages/patient/cart_page.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import '../../../core/util/theme/Colors.dart';
 
 class OrderScreen extends StatefulWidget {
@@ -14,6 +15,9 @@ class OrderScreen extends StatefulWidget {
 }
 
 class _OrderScreenState extends State<OrderScreen> {
+  final GlobalKey globalKey = GlobalKey();
+  String qrData = "SampleData1";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -135,6 +139,64 @@ class _OrderScreenState extends State<OrderScreen> {
                         ),
                       )
                     ],
+                  ),
+                  const SizedBox(height: 15,),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 45,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          showModalBottomSheet(
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(top: Radius.circular(10.0)),
+                              ),
+                              context: context,
+                              builder: (((context){
+                                return Container(
+                                  padding: const EdgeInsets.symmetric(vertical: 30),
+                                  height: 400,
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        "Show it to the pharmacist",
+                                        style: Theme.of(context).textTheme.headlineSmall,
+                                      ),
+                                      const SizedBox(height: 20,),
+                                      RepaintBoundary(
+                                        key: globalKey,
+                                        child: Center(
+                                          child: QrImageView(
+                                            data: qrData,
+                                            version: QrVersions.auto,
+                                            size: 200,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 20,),
+                                      const Text("№1784554884"),
+                                      const SizedBox(height: 10,),
+                                      const Text("2 receipts, 1 available product"),
+                                    ],
+                                  ),
+                                );
+                              }))
+                          );
+                        },
+                        style: ButtonStyle(
+                          shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)
+                          )),
+                          surfaceTintColor: const MaterialStatePropertyAll(Colors.black),
+                          backgroundColor: const MaterialStatePropertyAll(Color(0xff198A8E)),
+                          foregroundColor: const MaterialStatePropertyAll(Colors.white),
+                          overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+                          textStyle: MaterialStatePropertyAll(GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16)),
+                        ),
+                        child: const Text("Показать QR"),
+                      ),
+                    ),
                   ),
                 ],
               ),

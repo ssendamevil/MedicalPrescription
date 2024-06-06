@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:medical_prescription/domain/entities/cartItem.dart';
+import 'package:medical_prescription/domain/entities/cart.dart';
 import 'package:medical_prescription/presentation/bloc/cart_bloc/cart_bloc.dart';
 import 'package:medical_prescription/presentation/screens/patient/medicament_screen.dart';
 
 class CartPageItem extends StatefulWidget {
   const CartPageItem({Key? key, required this.cartItemEntity}) : super(key: key);
-
-  final CartItemEntity cartItemEntity;
+  final CartEntity cartItemEntity;
 
   @override
   State<CartPageItem> createState() => _CartPageItemState();
@@ -74,7 +73,7 @@ class _CartPageItemState extends State<CartPageItem> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Но-шпа", style: Theme.of(context).textTheme.headlineSmall,),
+                            Text(widget.cartItemEntity.medicamentEntity.name, style: Theme.of(context).textTheme.headlineSmall,),
                             const SizedBox(height: 4,),
                             const Row(
                               children: [

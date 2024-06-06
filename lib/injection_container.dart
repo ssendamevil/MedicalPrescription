@@ -6,6 +6,8 @@ import 'package:medical_prescription/data/data_sources/remote/auth/auth_api_serv
 import 'package:medical_prescription/data/data_sources/remote/prescription/prescription_api_service.dart';
 import 'package:medical_prescription/data/repository/auth_repository_impl.dart';
 import 'package:medical_prescription/data/repository/prescription_repository_impl.dart';
+import 'package:medical_prescription/domain/entities/cart.dart';
+import 'package:medical_prescription/domain/entities/medicament.dart';
 import 'package:medical_prescription/domain/entities/token.dart';
 import 'package:medical_prescription/domain/repository/prescription_repository.dart';
 import 'package:medical_prescription/domain/usecases/get_prescriptions.dart';
@@ -21,7 +23,10 @@ Future<void> initializeDependencies() async{
 
   await Hive.initFlutter();
   Hive.registerAdapter(TokenEntityAdapter());
+  Hive.registerAdapter(CartEntityAdapter());
+  Hive.registerAdapter(MedicamentEntityAdapter());
   await Hive.openBox<TokenEntity>(Hives.boxToken);
+  await Hive.openBox<CartEntity>(Hives.boxCart);
 
   sl.registerSingleton<AuthApiService>(AuthApiService(sl()));
   sl.registerSingleton<AuthRepository>(AuthRepositoryImpl(sl()));

@@ -5,7 +5,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'prescription_api_service.g.dart';
 
-@RestApi(baseUrl: ApiBaseUrl)
+@RestApi(baseUrl: apiBaseUrl)
 abstract class PrescriptionApiService{
   factory PrescriptionApiService(Dio dio) = _PrescriptionApiService;
 

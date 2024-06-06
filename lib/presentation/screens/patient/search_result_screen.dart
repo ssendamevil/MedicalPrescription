@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:medical_prescription/domain/entities/cart.dart';
+import 'package:medical_prescription/domain/entities/medicament.dart';
 import 'package:medical_prescription/presentation/bloc/cart_bloc/cart_bloc.dart';
 import 'package:medical_prescription/presentation/bloc/catalogue_bloc/catalogue_bloc.dart';
 import 'package:medical_prescription/presentation/pages/patient/search_page.dart';
-import 'package:medical_prescription/presentation/widgets/search_results_item.dart';
+import 'package:medical_prescription/presentation/components/search_results_item.dart';
+import 'package:uuid/uuid.dart';
 
 class SearchResultScreen extends StatefulWidget {
   const SearchResultScreen({Key? key}) : super(key: key);
@@ -30,6 +33,10 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     _fromEditingController = TextEditingController(text: "800");
     _toEditingController = TextEditingController(text: "1500");
   }
+
+  CartEntity cartEntity1 = CartEntity("d5464899fa", MedicamentEntity(1, "БиоЗим", 1580.0, "country", "company"), 1);
+  CartEntity cartEntity2 = CartEntity("dakfjafdak", MedicamentEntity(1, "Но-шпа", 350.0, "country", "company"), 1);
+
 
 
   @override
@@ -72,84 +79,154 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         showModalBottomSheet(
                           context: context,
                           builder: (((context){
-                            return Container(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 55,
-                                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                                    decoration: const BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(color: Color(0xffD7D7D7), width: 1.0)
-                                        )
-                                    ),
-                                    child: Stack(
-                                      children: [
-                                        Center(
-                                          child: Text("Sorting",
-                                            style: GoogleFonts.montserrat(
-                                                fontSize: 16.0,
-                                                fontWeight: FontWeight.w600
-                                            ),
+                            return Column(
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 55,
+                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  decoration: const BoxDecoration(
+                                      border: Border(
+                                          bottom: BorderSide(color: Color(0xffD7D7D7), width: 1.0)
+                                      )
+                                  ),
+                                  child: Stack(
+                                    children: [
+                                      Center(
+                                        child: Text("Sorting",
+                                          style: GoogleFonts.montserrat(
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.w600
                                           ),
                                         ),
-                                        Positioned(
-                                          right: 0,
-                                          top: 3,
-                                          child: IconButton(
-                                              onPressed: (){Navigator.of(context).pop();},
-                                              icon: const Icon(Iconsax.close_circle)
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                      ),
+                                      Positioned(
+                                        right: 0,
+                                        top: 3,
+                                        child: IconButton(
+                                            onPressed: (){Navigator.of(context).pop();},
+                                            icon: const Icon(Iconsax.close_circle)
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                                    child: Column(
-                                      children: [
-                                        TextButton(
-                                          onPressed: (){},
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              const Text("By alphabet"),
-                                              SizedBox(
-                                                width: 25,
-                                                height: 25,
-                                                child: Stack(
-                                                  children: [
-                                                    Align(
-                                                      alignment: Alignment.center,
-                                                      child: Container(
-                                                        width: 14,
-                                                        height: 14,
-                                                        decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.circular(100),
-                                                          color: Colors.black
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      width: 25,
-                                                      height: 25,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                                  child: Column(
+                                    children: [
+                                      TextButton(
+                                        onPressed: (){},
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Text("By alphabet"),
+                                            SizedBox(
+                                              width: 25,
+                                              height: 25,
+                                              child: Stack(
+                                                children: [
+                                                  Align(
+                                                    alignment: Alignment.center,
+                                                    child: Container(
+                                                      width: 14,
+                                                      height: 14,
                                                       decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.circular(100),
-                                                          border: Border.all(color: Colors.black, width: 2),
+                                                        borderRadius: BorderRadius.circular(100),
+                                                        color: Colors.black
                                                       ),
                                                     ),
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          )
+                                                  ),
+                                                  Container(
+                                                    width: 25,
+                                                    height: 25,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(100),
+                                                        border: Border.all(color: Colors.black, width: 2),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          ],
                                         )
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
+                                      ),
+                                      TextButton(
+                                        onPressed: (){},
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Text("By alphabet"),
+                                            SizedBox(
+                                              width: 25,
+                                              height: 25,
+                                              child: Stack(
+                                                children: [
+                                                  Align(
+                                                    alignment: Alignment.center,
+                                                    child: Container(
+                                                      width: 14,
+                                                      height: 14,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(100),
+                                                        color: Colors.black
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    width: 25,
+                                                    height: 25,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(100),
+                                                        border: Border.all(color: Colors.black, width: 2),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      ),
+                                      TextButton(
+                                        onPressed: (){},
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Text("By alphabet"),
+                                            SizedBox(
+                                              width: 25,
+                                              height: 25,
+                                              child: Stack(
+                                                children: [
+                                                  Align(
+                                                    alignment: Alignment.center,
+                                                    child: Container(
+                                                      width: 14,
+                                                      height: 14,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(100),
+                                                        color: Colors.black
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    width: 25,
+                                                    height: 25,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(100),
+                                                        border: Border.all(color: Colors.black, width: 2),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
                             );
                           }))
                         );
@@ -452,11 +529,11 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               width: MediaQuery.of(context).size.width,
               color: const Color(0xffF0F0F0),
               child: ListView(
-                children: const [
-                  SizedBox(height: 15,),
-                  SearchResultsItem(name: "БиоЗим",link: "https://st.europharma.kz/cache/product/14094/x248_5f59c2abe8811.png",),
-                  SizedBox(height: 15,),
-                  SearchResultsItem(name: "Но-шпа",link: "https://st.europharma.kz/cache/product/2135/x248_5f6874ea35695.png",)
+                children: [
+                  const SizedBox(height: 15,),
+                  SearchResultsItem(link: "https://st.europharma.kz/cache/product/14094/x248_5f59c2abe8811.png", cartEntity: cartEntity1,),
+                  const SizedBox(height: 15,),
+                  SearchResultsItem(link: "https://st.europharma.kz/cache/product/2135/x248_5f6874ea35695.png", cartEntity: cartEntity2,)
                 ],
               ),
             ),

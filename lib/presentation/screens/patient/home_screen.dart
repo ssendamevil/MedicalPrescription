@@ -2,12 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medical_prescription/presentation/screens/patient/patient_app.dart';
+import 'package:medical_prescription/presentation/widgets/shimmer_box.dart';
 import '../../../core/util/theme/Colors.dart';
-import '../../components/section_labels.dart';
+import '../../widgets/section_labels.dart';
 import '../../pages/patient/search_page.dart';
-import '../../widgets/slider_banner.dart';
-import '../../widgets/slider_prescription.dart';
-import '../../widgets/recent_order_slider.dart';
+import '../../components/slider_banner.dart';
+import '../../components/slider_prescription.dart';
+import '../../components/recent_order_slider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,6 +18,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -74,7 +77,39 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: SizedBox(
           width: MediaQuery.of(context).size.width,
-          child: SingleChildScrollView(
+          child: isLoading ? const Padding(
+            padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ShimmerBox(height: 190, width: 0, borderRadius: 10,),
+                  SizedBox(height: 12,),
+                  ShimmerBox(height: 12, width: 80, borderRadius: 10,),
+                  SizedBox(height: 25,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ShimmerBox(height: 20, width: 210, borderRadius: 10,),
+                      ShimmerBox(height: 20, width: 70, borderRadius: 10,),
+                    ],
+                  ),
+                  SizedBox(height: 25,),
+                  ShimmerBox(height: 180, width: 0, borderRadius: 10,),
+                  SizedBox(height: 30,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ShimmerBox(height: 20, width: 170, borderRadius: 10,),
+                      ShimmerBox(height: 20, width: 70, borderRadius: 10,),
+                    ],
+                  ),
+                  SizedBox(height: 30,),
+                  ShimmerBox(height: 180, width: 0, borderRadius: 10,)
+                ],
+              ),
+            ),
+          ) :
+          SingleChildScrollView(
             child: Column(
               children: [
                 const SizedBox(height: 15,),

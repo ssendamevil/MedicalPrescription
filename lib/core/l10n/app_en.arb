@@ -1,0 +1,10 @@
+{
+  "language": "English",
+  "@language": {
+    "description": "The current Language"
+  },
+  "label_my_last_pres": "My last prescriptions",
+  "@label_my_last_pres": {
+    "description": "The my last prescriptions label"
+  }
+}

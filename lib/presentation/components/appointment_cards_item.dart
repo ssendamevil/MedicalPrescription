@@ -65,7 +65,7 @@ class _AppointmentCardsItemState extends State<AppointmentCardsItem> {
                       ),
                     ),
                   ) :
-                widget.prescriptionEntity.appointmentState == "Realized" ?
+                widget.prescriptionEntity.appointmentState == "HANDED" ?
                   Container(
                     decoration: BoxDecoration(
                       color: const Color(0xff70B8ED),

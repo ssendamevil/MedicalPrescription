@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:medical_prescription/core/util/theme/Colors.dart';
 import 'package:medical_prescription/presentation/components/order_screen_item.dart';
 import 'package:medical_prescription/presentation/pages/patient/profile_page.dart';
+import 'package:medical_prescription/presentation/widgets/shimmer_box.dart';
 
 class OrdersScreen extends StatefulWidget {
   const OrdersScreen({Key? key}) : super(key: key);
@@ -13,6 +14,9 @@ class OrdersScreen extends StatefulWidget {
 }
 
 class _OrdersScreenState extends State<OrdersScreen> {
+  bool isLoading = false;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +37,118 @@ class _OrdersScreenState extends State<OrdersScreen> {
             bottom: BorderSide(color: customBlack.shade100, width: 1)
         ),
       ),
-      body: Column(
+      body: isLoading?
+      Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
+            decoration: const BoxDecoration(
+              color: Colors.white
+            ),
+            child: Column(
+              children: [
+                ShimmerBox(height: 25, width: MediaQuery.of(context).size.width, borderRadius: 0),
+                const SizedBox(height: 10,),
+                ShimmerBox(height: 25, width: MediaQuery.of(context).size.width, borderRadius: 0),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 25),
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  child: Column(
+                    children: [
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ShimmerBox(height: 25, width: 150, borderRadius: 0),
+                          ShimmerBox(height: 25, width: 150, borderRadius: 0),
+                        ],
+                      ),
+                      const SizedBox(height: 5,),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ShimmerBox(height: 25, width: 110, borderRadius: 0),
+                          ShimmerBox(height: 25, width: 70, borderRadius: 0),
+                        ],
+                      ),
+                      const SizedBox(height: 10,),
+                      ShimmerBox(height: 60, width: MediaQuery.of(context).size.width, borderRadius: 10)
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 10,),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  child: Column(
+                    children: [
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ShimmerBox(height: 25, width: 150, borderRadius: 0),
+                          ShimmerBox(height: 25, width: 150, borderRadius: 0),
+                        ],
+                      ),
+                      const SizedBox(height: 5,),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ShimmerBox(height: 25, width: 110, borderRadius: 0),
+                          ShimmerBox(height: 25, width: 70, borderRadius: 0),
+                        ],
+                      ),
+                      const SizedBox(height: 10,),
+                      ShimmerBox(height: 60, width: MediaQuery.of(context).size.width, borderRadius: 10)
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 10,),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                  child: Column(
+                    children: [
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ShimmerBox(height: 25, width: 150, borderRadius: 0),
+                          ShimmerBox(height: 25, width: 150, borderRadius: 0),
+                        ],
+                      ),
+                      const SizedBox(height: 5,),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ShimmerBox(height: 25, width: 110, borderRadius: 0),
+                          ShimmerBox(height: 25, width: 70, borderRadius: 0),
+                        ],
+                      ),
+                      const SizedBox(height: 10,),
+                      ShimmerBox(height: 60, width: MediaQuery.of(context).size.width, borderRadius: 10)
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      )
+      : Column(
         children: [
           Container(
             decoration: const BoxDecoration(

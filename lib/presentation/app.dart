@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medical_prescription/core/l10n/l10n.dart';
 import 'package:medical_prescription/core/util/theme/AppTheme.dart';
 import 'package:medical_prescription/data/data_sources/local/hive/box_helper.dart';
 import 'package:medical_prescription/presentation/bloc/auth_bloc/auth_bloc.dart';
@@ -9,6 +10,8 @@ import 'package:medical_prescription/presentation/bloc/search_bloc/search_bloc.d
 import 'package:medical_prescription/presentation/pages/patient/auth_page.dart';
 import 'package:medical_prescription/presentation/screens/patient/patient_app.dart';
 import 'package:medical_prescription/presentation/screens/pharmacy/pharmacy_app.dart';
+import 'package:toastification/toastification.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../injection_container.dart';
 import 'bloc/cart_bloc/cart_bloc.dart';
@@ -63,36 +66,43 @@ class _AppViewState extends State<AppView> {
   
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
-      home: BlocBuilder<AuthBloc, AuthState>(
-        builder: (context, state) {
-          if(BoxHelper.hasToken()) {
-            return Stack(
-              children: [
-                role=="Pharmacist"? const PharmacyApp() : const PatientApp(),
-                state.stateType == AuthStateType.isLoading ?
-                  const Center(
-                    child: CircularProgressIndicator(),
-                  ): Container()
-              ],
-            );
-          }else{
-            return Stack(
-              children: [
-                AuthPage(),
-                state.stateType == AuthStateType.isLoading ?
-                  const Center(
-                    child: CircularProgressIndicator(),
-                  ): Container()
-              ],
-            );
-          }
-        },
-      )
+    return ToastificationWrapper(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.system,
+        // supportedLocales: L10n.all,
+        // locale: const Locale('kz'),
+        // localizationsDelegates: const [
+        //
+        // ],
+        home: BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, state) {
+            if(BoxHelper.hasToken()) {
+              return Stack(
+                children: [
+                  role=="Pharmacist"? const PharmacyApp() : const PatientApp(),
+                  state.stateType == AuthStateType.isLoading ?
+                    const Center(
+                      child: CircularProgressIndicator(color: Color(0xff198A8E),),
+                    ): Container(),
+                ],
+              );
+            }else{
+              return Stack(
+                children: [
+                  AuthPage(),
+                  state.stateType == AuthStateType.isLoading ?
+                    const Center(
+                      child: CircularProgressIndicator(color: Color(0xff198A8E),),
+                    ): Container(),
+                ],
+              );
+            }
+          },
+        )
+      ),
     );
   }
 }

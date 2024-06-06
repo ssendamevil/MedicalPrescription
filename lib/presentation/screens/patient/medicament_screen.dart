@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medical_prescription/core/util/theme/Colors.dart';
-import 'package:medical_prescription/domain/entities/cartItem.dart';
+import 'package:medical_prescription/domain/entities/cart.dart';
 import 'package:medical_prescription/domain/entities/medicament.dart';
 import 'package:medical_prescription/presentation/bloc/cart_bloc/cart_bloc.dart';
 import 'package:medical_prescription/presentation/components/instruction_item.dart';
@@ -22,7 +22,7 @@ class MedicamentScreen extends StatefulWidget {
 class _MedicamentScreenState extends State<MedicamentScreen> {
   int photoCurrentIndex = 0;
   late CartBloc cartBloc;
-  CartItemEntity cartItemEntity = CartItemEntity("1234", MedicamentEntity("name", "price", "country", "company", 1), 1);
+  CartEntity cartEntity = CartEntity("1234", MedicamentEntity(1, "name", 1000.0, "country", "company"), 1);
 
 
   @override
@@ -238,13 +238,13 @@ class _MedicamentScreenState extends State<MedicamentScreen> {
                   )
                 ),
                 const SizedBox(width: 5,),
-                state.cartItems.contains(cartItemEntity) ?
+                state.cartItems.contains(cartEntity) ?
                 SizedBox(
                   width: MediaQuery.of(context).size.width*0.5,
                   height: 50,
                   child: ElevatedButton(
                     onPressed: (){
-                      state.cartItems.contains(cartItemEntity)? null : cartBloc.add(AddMedicamentToCartEvent(cartItemEntity));
+                      state.cartItems.contains(cartEntity)? null : cartBloc.add(AddMedicamentToCartEvent(cartEntity));
                     },
                     style: ButtonStyle(
                       shape: MaterialStatePropertyAll(RoundedRectangleBorder(

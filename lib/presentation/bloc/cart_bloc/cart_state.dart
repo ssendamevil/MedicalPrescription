@@ -10,7 +10,7 @@ enum CartStateType{
 @immutable
 class CartState {
 
-  final List<CartItemEntity> cartItems;
+  final List<CartEntity> cartItems;
   final CartStateType state;
 
   const CartState({
@@ -20,7 +20,7 @@ class CartState {
 
 
   CartState copyOf({
-    List<CartItemEntity>? cartItems,
+    List<CartEntity>? cartItems,
     CartStateType? cartStateType
   }) => CartState(
       cartItems: cartItems ?? this.cartItems,

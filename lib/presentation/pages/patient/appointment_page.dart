@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medical_prescription/domain/entities/prescription.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:medical_prescription/presentation/bloc/prescription/prescription_bloc.dart';
-import 'package:medical_prescription/presentation/components/appointment_cards_item.dart';
+import 'package:medical_prescription/presentation/components/appointment_section.dart';
+import 'package:medical_prescription/presentation/widgets/shimmer_box.dart';
 
 
 class AppointmentPage extends StatefulWidget {
@@ -51,146 +53,69 @@ class _AppointmentPageState extends State<AppointmentPage> {
         body: BlocBuilder<PrescriptionBloc, PrescriptionState>(
           builder: (context, state) {
             if(state.stateType == PrescriptionStateType.success){
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15, right: 25, left: 25, bottom: 0),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Active",
-                            style: GoogleFonts.montserrat(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700
-                            ),
-                          ),
-                          const SizedBox(width: 10,),
-                          Text('${state.prscps.length}',
-                            style: GoogleFonts.montserrat(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                color: const Color(0xff999999)
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                        height: 550,
-                        color: Colors.transparent,
-                        padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                        child: ListView.separated(
-                            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (BuildContext context, int index) {
-                              return AppointmentCardsItem(prescriptionEntity: state.prscps.elementAt(index) );
-                            },
-                            separatorBuilder: (BuildContext context, int index) => const SizedBox(width: 20,),
-                            itemCount: state.prscps.length
-                        )
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15, right: 25, left: 25, bottom: 0),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Realized",
-                            style: GoogleFonts.montserrat(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700
-                            ),
-                          ),
-                          const SizedBox(width: 10,),
-                          Text("1",
-                            style: GoogleFonts.montserrat(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                color: const Color(0xff999999)
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                        height: 260,
-                        color: Colors.transparent,
-                        padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                        child: ListView.separated(
-                            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (BuildContext context, int index) {
-                              return AppointmentCardsItem(
-                                prescriptionEntity: PrescriptionEntity(
-                                  appointmentState: "Realized",
-                                  expirationDate: DateTime(2023),
-                                  issueDate: DateTime(2022),
-                                  activeIngredients: const ["Пасиреотид", "Октреотид"],
-                                  doctorId: 45894,
-                                  patientId: 564846,
-                                  id: 184515,
-                                ),
-                              );
-                            },
-                            separatorBuilder: (BuildContext context, int index) => const SizedBox(width: 20,),
-                            itemCount: 1
-                        )
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15, right: 25, left: 25, bottom: 0),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Expired",
-                            style: GoogleFonts.montserrat(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700
-                            ),
-                          ),
-                          const SizedBox(width: 10,),
-                          Text("1",
-                            style: GoogleFonts.montserrat(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                                color: const Color(0xff999999)
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                        height: 260,
-                        color: Colors.transparent,
-                        padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                        child: ListView.separated(
-                            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (BuildContext context, int index) {
-                              return AppointmentCardsItem(
-                                prescriptionEntity: PrescriptionEntity(
-                                  appointmentState: "Expired",
-                                  expirationDate: DateTime(2023),
-                                  issueDate: DateTime(2023),
-                                  activeIngredients: const ["L-лизина эсцинат", "инозитол"],
-                                  doctorId: 45894,
-                                  patientId: 564846,
-                                  id: 184515,
-                                ),
-                              );
-                            },
-                            separatorBuilder: (BuildContext context, int index) => const SizedBox(width: 20,),
-                            itemCount: 1
-                        )
-                    ),
-                  ],
+              if(state.activePrescriptions.isEmpty && state.inactivePrescriptions.isEmpty && state.expiredPrescriptions.isEmpty && state.handedPrescriptions.isEmpty){
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset("assets/icons/Prescription_emptystate.png", height: 200, width: 250,),
+                      Text("There is no prescriptions",
+                        style: GoogleFonts.montserrat(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              }else {
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      if(state.activePrescriptions.isNotEmpty)
+                        AppointmentSection(sectionName: "Active",
+                          prstns: state.activePrescriptions,),
+                      if(state.handedPrescriptions.isNotEmpty)
+                        AppointmentSection(sectionName: "Realized",
+                            prstns: state.handedPrescriptions),
+                      if(state.expiredPrescriptions.isNotEmpty)
+                        AppointmentSection(sectionName: "Expired",
+                            prstns: state.expiredPrescriptions)
+                    ],
+                  ),
+                );
+              }
+            }else if(state.stateType == PrescriptionStateType.isLoading){
+              return const Padding(
+                padding: EdgeInsets.only(left: 20.0, top: 20, right: 20.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ShimmerBox(height: 30, width: 150, borderRadius: 10,),
+                      SizedBox(height: 20,),
+                      ShimmerBox(height: 350, width: 0, borderRadius: 10,),
+                      SizedBox(height: 15,),
+                      ShimmerBox(height: 30, width: 150, borderRadius: 10,),
+                      SizedBox(height: 20,),
+                      ShimmerBox(height: 180, width: 0, borderRadius: 10,),
+                    ],
+                  ),
                 ),
               );
-            }else if(state.stateType == PrescriptionStateType.isLoading){
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
             }else{
-              return Container();
+              return Center(
+                child: Container(
+                  child: Text(
+                    "Internal server error: 500!",
+                    style: GoogleFonts.montserrat(
+                      fontSize: 16.0,
+                      color: Colors.grey
+                    ),
+                  ),
+                ),
+              );
             }
           },
         )

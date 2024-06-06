@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:medical_prescription/domain/entities/cartItem.dart';
-import 'package:medical_prescription/domain/entities/medicament.dart';
+import 'package:medical_prescription/data/data_sources/local/hive/box_helper.dart';
+import 'package:medical_prescription/domain/entities/cart.dart';
 import 'package:medical_prescription/presentation/bloc/cart_bloc/cart_bloc.dart';
 import 'package:medical_prescription/presentation/screens/patient/medicament_screen.dart';
 
 class SearchResultsItem extends StatefulWidget {
-  const SearchResultsItem({Key? key, required this.name, required this.link}) : super(key: key);
-
-  final String name;
+  const SearchResultsItem({Key? key, required this.link, required this.cartEntity}) : super(key: key);
+  final CartEntity cartEntity;
   final String link;
 
   @override
@@ -20,8 +19,6 @@ class SearchResultsItem extends StatefulWidget {
 
 class _SearchResultsItemState extends State<SearchResultsItem> {
   late CartBloc cartBloc;
-
-  CartItemEntity cartItemEntity = CartItemEntity("1234", MedicamentEntity("name", "price", "country", "company", 1), 1);
 
   @override
   void initState() {
@@ -78,7 +75,7 @@ class _SearchResultsItemState extends State<SearchResultsItem> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(widget.name, style: Theme.of(context).textTheme.headlineSmall,),
+                          Text(widget.cartEntity.medicamentEntity.name, style: Theme.of(context).textTheme.headlineSmall,),
                           const SizedBox(height: 4,),
                           const Row(
                             children: [
@@ -112,12 +109,21 @@ class _SearchResultsItemState extends State<SearchResultsItem> {
                                     overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                     foregroundColor: const MaterialStatePropertyAll(Colors.black),
                                     shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))),
-                                    backgroundColor: state.cartItems.contains(cartItemEntity)? const MaterialStatePropertyAll(Color(0xffAAAAAA)) : const MaterialStatePropertyAll(Color(0xff199A8E))
+                                    backgroundColor: BoxHelper.getCart()!.contains(widget.cartEntity) ?
+                                      const MaterialStatePropertyAll(Color(0xffAAAAAA)) :
+                                      const MaterialStatePropertyAll(Color(0xff199A8E))
                                   ),
                                   onPressed: (){
-                                    state.cartItems.contains(cartItemEntity)? null : cartBloc.add(AddMedicamentToCartEvent(cartItemEntity));
+                                    BoxHelper.getCart()!.contains(widget.cartEntity)?
+                                      null :
+                                      cartBloc.add(AddMedicamentToCartEvent(widget.cartEntity));
                                   },
-                                  child: Text( state.cartItems.contains(cartItemEntity)? "In cart" : "Add", style: GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14))
+                                  child: Text(
+                                    BoxHelper.getCart()!.contains(widget.cartEntity)?
+                                      "In cart" :
+                                      "Add",
+                                    style: GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14)
+                                  )
                                 );
                               }
                             ),

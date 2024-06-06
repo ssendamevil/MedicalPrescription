@@ -5,13 +5,13 @@ import 'package:retrofit/retrofit.dart';
 part 'auth_api_service.g.dart';
 
 
-@RestApi(baseUrl: ApiBaseUrl)
+@RestApi(baseUrl: apiBaseUrl)
 abstract class AuthApiService{
   factory AuthApiService(Dio dio) = _AuthApiService;
 
   @POST('/auth')
   Future<HttpResponse<UserModel>> loginUser({
     @Field("username") required String username,
-    @Field("password") required String  password,
+    @Field("password") required String password,
   });
 }

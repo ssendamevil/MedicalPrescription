@@ -1,4 +1,5 @@
-import 'package:medical_prescription/domain/entities/prescription.dart';
+import 'package:medical_prescription/data/models/tag.dart';
+import 'package:medical_prescription/domain/entities/prescription/prescription.dart';
 
 class PrescriptionModel extends PrescriptionEntity {
   const PrescriptionModel({
@@ -14,9 +15,11 @@ class PrescriptionModel extends PrescriptionEntity {
   factory PrescriptionModel.fromJson(Map<String, dynamic> map){
     return PrescriptionModel(
         appointmentState: map["status"] ?? "",
-        expirationDate: DateTime(2024),
-        issueDate: DateTime(2023),
-        activeIngredients: ["1"] ,
+        expirationDate: '',
+        issueDate: '',
+        activeIngredients: (map['tags'] as List)
+            .map((i) => TagModel.fromJson(i as Map<String, dynamic>))
+            .toList() ?? [] ,
         doctorId: map["doctorId"]["id"] ?? 0,
         patientId: map["doctorId"]["id"] ?? 0,
         id: map["id"]?? 0

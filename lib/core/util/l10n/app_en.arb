@@ -1,0 +1,158 @@
+{
+  "@@locale": "en",
+  "language": "English",
+  "@language": {
+    "description": "The current Language"
+  },
+  "label_my_last_pres": "My last prescriptions",
+  "@label_my_last_pres": {
+    "description": "The my last prescriptions label"
+  },
+  "label_see_all": "See all",
+  "@label_see_all": {
+    "description": "See all label button"
+  },
+  "label_search_home": "Search in pharmacies of the city",
+  "@label_search_home": {
+    "description": "search tab label"
+  },
+  "label_recent_orders": "Recent orders",
+  "@label_recent_orders": {
+    "description": "Recent orders label"
+  },
+  "label_map_pharmacies": "Map of pharmacies",
+  "@label_map_pharmacies": {
+    "description": "Map section label"
+  },
+  "navbar_item_home": "Home",
+  "@label_item_home": {
+    "description": "Navigationbar item label"
+  },
+  "navbar_item_search": "Search",
+  "@label_item_search": {
+    "description": "Navigationbar item label"
+  },
+  "navbar_item_appointment": "Appointment",
+  "@label_item_appointment": {
+    "description": "Navigationbar item label"
+  },
+  "navbar_item_cart": "Cart",
+  "@label_item_cart": {
+    "description": "Navigationbar item label"
+  },
+  "navbar_item_profile": "Profile",
+  "@label_item_profile": {
+    "description": "Navigationbar item label"
+  },
+  "profile_table_items_orders": "Orders",
+  "profile_table_items_useragreement": "User agreement",
+  "profile_table_items_fag": "FAQ",
+  "profile_table_items_wts": "Write to Support",
+  "profile_table_items_logout": "Logout",
+  "login_btn": "Login",
+  "login_greating_title": "Let's get started!",
+  "login_greating_desc": "Login to enjoy the features we’ve provided, and stay healthy!",
+  "sign_up_btn": "Sign Up",
+  "textfield_username": "Enter your username",
+  "textfield_iin": "Enter your IIN",
+  "textfield_password": "Enter your password",
+  "login_screen_title": "Login in Medics",
+  "treatment_title": "Treatment Scheme",
+  "treatment_empty": "There is no prescriptions",
+  "cart_empty": "Cart is empty",
+  "treatment_label_active": "Active",
+  "treatment_label_expired": "Expired",
+  "treatment_label_realized": "Realized",
+  "treatment_label_inactive": "Inactive",
+  "open_btn": "Open",
+  "label_doctor": "Doctor",
+  "label_discharged": "Discharged",
+  "map_title": "Nearest pharmacies",
+  "catalog_title": "Catalog",
+  "catalog_search_label": "Search medicine",
+  "order_status_approved": "Order accepted",
+  "order_status_cancel": "Order rejected",
+  "order_status_ready": "Order is ready",
+  "order_status_inProgress": "Order in progress",
+  "order_status_shelflife": "The shelf life of the order is 48 hours",
+  "order_pickup": "Pick up from",
+  "pharmacy_pres_status": "Accepts EP",
+  "qr_show_btn": "Show QR",
+  "items_on_order": "Items in order",
+  "my_order_label": "Ваш заказ",
+  "item_count": "Items ({count} pc)",
+  "@item_count": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "total": "Total",
+  "cancel_order_btn": "Cancel order",
+  "qr_title_label": "Show it to the pharmacist",
+  "avaible_prod": "{count} available product",
+  "@avaible_prod": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "cart_pharmacy_btn": "Take from pharmacy",
+  "cart_pickup": "Pickup",
+  "price": "from {price}₸",
+  "@price": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "order_screen_title": "{id} Тапсырыс",
+  "@order_screen_title": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "product_title": "Product",
+  "product_active_ingre": "Active ingredients",
+  "product_instructions": "Instructions",
+  "product_gobtn": "Go to cart",
+  "product_btn": "Add to cart",
+  "product_country": "Country",
+  "product_dosage": "Dosage",
+  "product_producer": "Producer",
+  "on_prescription_label": "Issued by prescription",
+  "prescription_title": "Prescription",
+  "presc_type": "Type",
+  "presc_btn": "Buy at {price}₸",
+  "@presc_btn": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "presc_dis_doc": "Discharged doctor",
+  "expiration_status": "The validity period expires in {day} days",
+  "@expiration_status": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      }
+    }
+  },
+  "checkout_btn": "Checkout",
+  "checkout_title": "Checkout",
+  "checkout_pickup": "Pick up from pharmacy",
+  "checkout_pickup_price": "Free",
+  "pharmacy": "Pharmacy",
+  "checkout_payment": "Payment method",
+  "checkout_payment_detail": "In cash or by bank card upon receipt",
+  "order_details": "Order details",
+  "order_amount": "Order amount",
+  "see_btn": "Show"
+}

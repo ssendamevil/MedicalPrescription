@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:medical_prescription/domain/entities/cart/cart.dart';
+import 'package:medical_prescription/domain/entities/prescription/prescription.dart';
 import 'package:medical_prescription/presentation/components/modal_body_view.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
-
-import '../../../domain/entities/mapPoint.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../domain/entities/map/map_point.dart';
 import '../../components/cluster_icon_pointer.dart';
 
 
@@ -42,7 +44,9 @@ class _MapScreenState extends State<MapScreen> {
               Navigator.pop(context);
             },
           ),
-          title: Text("Nearest pharmacies", style: GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w500),),
+          title: Text(
+          AppLocalizations.of(context)!.map_title,
+          style: GoogleFonts.montserrat(fontSize: 16, fontWeight: FontWeight.w500),),
           centerTitle: true,
         ),
         body: YandexMap(
@@ -71,7 +75,7 @@ class _MapScreenState extends State<MapScreen> {
                 ),
                 animation: const MapAnimation(
                   type: MapAnimationType.linear,
-                  duration: 0.3,
+                  duration: 0.1,
                 ),
               );
             }
@@ -117,7 +121,7 @@ class _MapScreenState extends State<MapScreen> {
             CameraUpdate.newCameraPosition(
               CameraPosition(
                 target: cluster.placemarks.first.point,
-                zoom: _mapZoom + 1,
+                zoom: _mapZoom + 3,
               ),
             ),
           );

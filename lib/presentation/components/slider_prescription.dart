@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:medical_prescription/domain/entities/prescription/prescription.dart';
+import 'package:medical_prescription/presentation/app.dart';
+import 'package:medical_prescription/presentation/components/status_label.dart';
 import 'package:medical_prescription/presentation/screens/patient/prescription_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SliderPrescriptions extends StatelessWidget {
-  const SliderPrescriptions({Key? key}) : super(key: key);
+  const SliderPrescriptions({Key? key, required this.prescs}) : super(key: key);
+  final List<PrescriptionEntity> prescs;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +20,7 @@ class SliderPrescriptions extends StatelessWidget {
         itemBuilder: (BuildContext context, int index){
           return Padding(
             padding: index==0? const EdgeInsets.only(left: 20.0, right: 5.0,top: 15.0, bottom: 15.0) :
-            index==3? const EdgeInsets.only(left: 5.0, right: 20.0,top: 15.0, bottom: 15.0) : const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
+            index==prescs.length-1? const EdgeInsets.only(left: 5.0, right: 20.0,top: 15.0, bottom: 15.0) : const EdgeInsets.symmetric(vertical: 15.0, horizontal: 5.0),
             child: Container(
               width: MediaQuery.of(context).size.width-40,
               padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
@@ -42,47 +47,35 @@ class SliderPrescriptions extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        width: 100,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.0),
-                          color: const Color(0xffA8FF92)
-                        ),
-                        child: Center(
-                          child: Text("Realized",
-                            style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xff177500)
-                            ),
-                          )
-                        ),
-                      ),
+                      StatusLabel(status: AppLocalizations.of(context)!.treatment_label_realized, isOrder: false, ),
                       const Text("19.10.2024")
                     ],
                   ),
                   const SizedBox(height: 10,),
                   Text(
                     "City polyclinic No.4",
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16
+                    ),
                   ),
                   const SizedBox(height: 10,),
-                  const Text("Doctor"),
+                  Text(AppLocalizations.of(context)!.label_doctor, style: GoogleFonts.montserrat(fontWeight: FontWeight.w600),),
                   const Text("Berikov Berik Berikulu"),
                   const SizedBox(height: 10,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Discharged"),
-                          Text("1 medication, 15 products"),
+                          Text(AppLocalizations.of(context)!.label_discharged, style: GoogleFonts.montserrat(fontWeight: FontWeight.w600),),
+                          const Text("1 medication, 15 products"),
                         ],
                       ),
                       ElevatedButton(
                         onPressed: (){
-                          Navigator.push(context, CupertinoPageRoute(builder: (context) => const PrescriptionScreen()));
+                          Navigator.push(context, CupertinoPageRoute(builder: (context) => PrescriptionScreen(prescriptionEntity: prescs.elementAt(index),)));
                         },
                         style: ButtonStyle(
                           shape: MaterialStatePropertyAll(RoundedRectangleBorder(
@@ -94,7 +87,7 @@ class SliderPrescriptions extends StatelessWidget {
                           overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                           textStyle: MaterialStatePropertyAll(GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 14)),
                         ),
-                        child: const Text("Open"),
+                        child: Text(AppLocalizations.of(context)!.open_btn),
                       )
                     ],
                   )
@@ -103,7 +96,7 @@ class SliderPrescriptions extends StatelessWidget {
             ),
           );
         },
-        itemCount: 4,
+        itemCount: prescs.length,
       )
     );
   }

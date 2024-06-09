@@ -4,14 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medical_prescription/data/data_sources/local/hive/box_helper.dart';
-import 'package:medical_prescription/domain/entities/cart.dart';
+import 'package:medical_prescription/domain/entities/cart/cart.dart';
 import 'package:medical_prescription/presentation/bloc/cart_bloc/cart_bloc.dart';
 import 'package:medical_prescription/presentation/screens/patient/medicament_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchResultsItem extends StatefulWidget {
-  const SearchResultsItem({Key? key, required this.link, required this.cartEntity}) : super(key: key);
+  const SearchResultsItem({Key? key, required this.cartEntity}) : super(key: key);
   final CartEntity cartEntity;
-  final String link;
 
   @override
   State<SearchResultsItem> createState() => _SearchResultsItemState();
@@ -57,18 +57,20 @@ class _SearchResultsItemState extends State<SearchResultsItem> {
             overlayColor: const MaterialStatePropertyAll(Colors.transparent),
           ),
           onPressed: (){
-            Navigator.push(context, CupertinoPageRoute(builder: (context) => const MedicamentScreen()));
+            Navigator.push(context, CupertinoPageRoute(builder: (context) => MedicamentScreen(cartEntity: widget.cartEntity,)));
           },
           child: Row(
             children: [
               Expanded(
                 flex: 1,
-                child: Image.network(widget.link),
+                child: widget.cartEntity.medicamentEntity.imageUrl != ""?
+                  Image.network(widget.cartEntity.medicamentEntity.imageUrl)
+                : Image.asset('assets/images/pill.png'),
               ),
               Expanded(
                 flex: 3,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -77,13 +79,13 @@ class _SearchResultsItemState extends State<SearchResultsItem> {
                         children: [
                           Text(widget.cartEntity.medicamentEntity.name, style: Theme.of(context).textTheme.headlineSmall,),
                           const SizedBox(height: 4,),
-                          const Row(
+                          Row(
                             children: [
-                              Icon(Iconsax.warning_2, size: 16,color: Colors.orange,),
-                              SizedBox(width: 5,),
+                              const Icon(Iconsax.warning_2, size: 16,color: Colors.orange,),
+                              const SizedBox(width: 5,),
                               Text(
-                                "On Prescription",
-                                style: TextStyle(
+                                AppLocalizations.of(context)!.on_prescription_label,
+                                style: const TextStyle(
                                     color: Colors.orange
                                 ),
                               )
@@ -98,7 +100,7 @@ class _SearchResultsItemState extends State<SearchResultsItem> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("from 5 635₸", style: Theme.of(context).textTheme.titleLarge,),
+                          Text(AppLocalizations.of(context)!.price("${widget.cartEntity.medicamentEntity.price.round()}"), style: Theme.of(context).textTheme.titleLarge,),
                           SizedBox(
                             height: 37,
                             width: 100,
@@ -109,17 +111,17 @@ class _SearchResultsItemState extends State<SearchResultsItem> {
                                     overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                                     foregroundColor: const MaterialStatePropertyAll(Colors.black),
                                     shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))),
-                                    backgroundColor: BoxHelper.getCart()!.contains(widget.cartEntity) ?
+                                    backgroundColor: BoxHelper.getCartItem(widget.cartEntity) != null ?
                                       const MaterialStatePropertyAll(Color(0xffAAAAAA)) :
                                       const MaterialStatePropertyAll(Color(0xff199A8E))
                                   ),
                                   onPressed: (){
-                                    BoxHelper.getCart()!.contains(widget.cartEntity)?
+                                    BoxHelper.getCartItem(widget.cartEntity) != null?
                                       null :
                                       cartBloc.add(AddMedicamentToCartEvent(widget.cartEntity));
                                   },
                                   child: Text(
-                                    BoxHelper.getCart()!.contains(widget.cartEntity)?
+                                      BoxHelper.getCartItem(widget.cartEntity) != null?
                                       "In cart" :
                                       "Add",
                                     style: GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14)

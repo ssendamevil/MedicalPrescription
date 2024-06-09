@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:medical_prescription/data/data_sources/local/hive/box_helper.dart';
-import 'package:medical_prescription/domain/entities/cart.dart';
+import 'package:medical_prescription/domain/entities/cart/cart.dart';
 import 'package:meta/meta.dart';
 
 part 'cart_event.dart';
@@ -21,10 +21,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   Future<void> _onAddMedicamentToCart(AddMedicamentToCartEvent event, Emitter<CartState> emit) async {
     emit(state.copyOf(cartStateType: CartStateType.inProgress));
     medicament = [...state.cartItems];
-    if(!medicament.contains(event.cartEntity)){
-      medicament.add(event.cartEntity);
-    }
-    BoxHelper.saveCartItem(CartEntity(event.cartEntity.id, event.cartEntity.medicamentEntity, event.cartEntity.itemCount));
+    BoxHelper.saveCartItem(event.cartEntity);
     emit(state.copyOf(cartItems: medicament, cartStateType: CartStateType.success));
   }
 

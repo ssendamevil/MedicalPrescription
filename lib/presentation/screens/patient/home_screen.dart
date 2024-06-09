@@ -1,8 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medical_prescription/presentation/bloc/order/order_bloc.dart';
+import 'package:medical_prescription/presentation/bloc/prescription/prescription_bloc.dart';
 import 'package:medical_prescription/presentation/screens/patient/patient_app.dart';
 import 'package:medical_prescription/presentation/widgets/shimmer_box.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+import 'package:yandex_mapkit/yandex_mapkit.dart';
 import '../../../core/util/theme/Colors.dart';
 import '../../widgets/section_labels.dart';
 import '../../pages/patient/search_page.dart';
@@ -18,7 +24,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late PrescriptionBloc _prescriptionBloc;
+  late OrderBloc _orderBloc;
   bool isLoading = false;
+  late final YandexMapController _mapController;
+  CameraPosition? _userLocation;
+  var _mapZoom = 0.0;
+  
+  @override
+  void initState() {
+    _prescriptionBloc = context.read<PrescriptionBloc>();
+    _orderBloc = context.read<OrderBloc>();
+    _prescriptionBloc.add(GetAllPrscrpEvent());
+    _orderBloc.add(GetAllOrdersByPatientEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           const Icon(CupertinoIcons.search),
                           const SizedBox(width: 10,),
                           Text(
-                            "Search in pharmacies of the city",
+                            AppLocalizations.of(context)!.label_search_home,
                             style: GoogleFonts.montserrat(
                                 textStyle: Theme.of(context).textTheme.titleSmall,
                                 color: customBlack.shade300
@@ -77,66 +97,110 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: SizedBox(
           width: MediaQuery.of(context).size.width,
-          child: isLoading ? const Padding(
-            padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  ShimmerBox(height: 190, width: 0, borderRadius: 10,),
-                  SizedBox(height: 12,),
-                  ShimmerBox(height: 12, width: 80, borderRadius: 10,),
-                  SizedBox(height: 25,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ShimmerBox(height: 20, width: 210, borderRadius: 10,),
-                      ShimmerBox(height: 20, width: 70, borderRadius: 10,),
-                    ],
-                  ),
-                  SizedBox(height: 25,),
-                  ShimmerBox(height: 180, width: 0, borderRadius: 10,),
-                  SizedBox(height: 30,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ShimmerBox(height: 20, width: 170, borderRadius: 10,),
-                      ShimmerBox(height: 20, width: 70, borderRadius: 10,),
-                    ],
-                  ),
-                  SizedBox(height: 30,),
-                  ShimmerBox(height: 180, width: 0, borderRadius: 10,)
-                ],
-              ),
-            ),
-          ) :
-          SingleChildScrollView(
+          child: SingleChildScrollView(
             child: Column(
               children: [
                 const SizedBox(height: 15,),
                 const SliderBanner(),
                 const SizedBox(height: 15,),
-                sectionLabels(context, "My last prescriptions", true, 2),
-                const SliderPrescriptions(),
+                BlocBuilder<PrescriptionBloc, PrescriptionState>(
+                  builder: (context, state) {
+                    if(state.stateType == PrescriptionStateType.isLoading){
+                      return Skeletonizer(
+                          enabled: state.stateType == PrescriptionStateType.isLoading,
+                          child: Column(
+                            children: [
+                              sectionLabels(context, AppLocalizations.of(context)!.label_recent_orders, true, 4),
+                              const SizedBox(height: 15,),
+                              const ShimmerBox(height: 200, width: 0, borderRadius: 10)
+                            ],
+                          )
+                      );
+                    }else {
+                      return Skeletonizer(
+                          enabled: state.stateType == PrescriptionStateType.isLoading,
+                          child: Column(
+                            children: [
+                              sectionLabels(context, AppLocalizations.of(context)!.label_my_last_pres, true, 2),
+                              SliderPrescriptions(prescs: state.prscps,),
+                            ],
+                          )
+                      );
+                    }
+                  },
+                ),
                 const SizedBox(height: 20,),
-                sectionLabels(context, "Recent Orders", true, 4),
-                const RecentOrderSlider(),
+                BlocBuilder<OrderBloc, OrderState>(
+                  builder: (context, state) {
+                    if(state.stateType == OrderStateType.isLoading){
+                      return Skeletonizer(
+                          enabled: state.stateType == OrderStateType.isLoading,
+                          child: Column(
+                            children: [
+                              sectionLabels(context, AppLocalizations.of(context)!.label_recent_orders, true, 4),
+                              const SizedBox(height: 15,),
+                              const ShimmerBox(height: 200, width: 0, borderRadius: 10)
+                            ],
+                          )
+                      );
+                    }else {
+                      return Skeletonizer(
+                          enabled: state.stateType == OrderStateType.isLoading,
+                          child: Column(
+                            children: [
+                              sectionLabels(context, AppLocalizations.of(context)!.label_recent_orders, true, 4),
+                              RecentOrderSlider(orders: state.orders,)
+                            ],
+                          )
+                      );
+                    }
+                  },
+                ),
                 const SizedBox(height: 40,),
-                sectionLabels(context, "Map of pharmacies", false, 0),
+                sectionLabels(context, AppLocalizations.of(context)!.label_map_pharmacies, false, 0),
                 const SizedBox(height: 20),
-                Container(
-                  height: 150,
-                  width: MediaQuery.of(context).size.width-40,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white
                     ),
-                    child: Container()
+                    width: MediaQuery.of(context).size.width,
+                    height: 100,
+                    child: YandexMap(
+                      tiltGesturesEnabled: false,
+                      zoomGesturesEnabled: false,
+                      rotateGesturesEnabled: false,
+                      scrollGesturesEnabled: false,
+                      onCameraPositionChanged: (cameraPosition, _, __) {
+                        setState(() {
+                          _mapZoom = cameraPosition.zoom;
+                        });
+                      },
+                      onUserLocationAdded: (view) async {
+                        // получаем местоположение пользователя
+                        _userLocation = await _mapController.getUserCameraPosition();
+                        // если местоположение найдено, центрируем карту относительно этой точки
+                        if (_userLocation != null) {
+                          await _mapController.moveCamera(
+                            CameraUpdate.newCameraPosition(
+                              _userLocation!.copyWith(zoom: 10),
+                            ),
+                            animation: const MapAnimation(
+                              type: MapAnimationType.linear,
+                              duration: 0.1,
+                            ),
+                          );
+                        }
+                        // меняем внешний вид маркера - делаем его непрозрачным
+                        return view.copyWith(
+                          pin: view.pin.copyWith(
+                            opacity: 1,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
                 const SizedBox(height: 40),

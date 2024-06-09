@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:medical_prescription/core/resources/data_state.dart';
 import 'package:medical_prescription/data/data_sources/local/hive/box_helper.dart';

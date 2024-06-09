@@ -37,6 +37,7 @@ class _SearchScreenState extends State<SearchScreen> {
         return false;
       },
       child: Scaffold(
+        extendBodyBehindAppBar: true,
         backgroundColor: const Color(0xffE5E5E5),
         appBar: AppBar(
           scrolledUnderElevation: 0,

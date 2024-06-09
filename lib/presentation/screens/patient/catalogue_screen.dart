@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medical_prescription/core/util/theme/Colors.dart';
+import 'package:medical_prescription/presentation/bloc/medicament/medicament_bloc.dart';
 import 'package:medical_prescription/presentation/pages/patient/search_page.dart';
 import 'package:medical_prescription/presentation/screens/patient/patient_app.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CatalogueScreen extends StatefulWidget {
   CatalogueScreen({Key? key}) : super(key: key);
@@ -28,10 +31,17 @@ class CatalogueScreen extends StatefulWidget {
 class _CatalogueScreenState extends State<CatalogueScreen> {
   int ind = 0;
   double leftX = 0;
-  String title = 'Catalog';
+  late MedicamentBloc _medicamentBloc;
+
+  @override
+  void initState() {
+    _medicamentBloc = context.read<MedicamentBloc>();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    String title = AppLocalizations.of(context)!.catalog_title;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -41,7 +51,7 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
         IconButton(
             onPressed: (){
               setState(() {
-                title = 'Catalog';
+                title = AppLocalizations.of(context)!.catalog_title;
                 leftX = 0;
               });
             },
@@ -60,7 +70,7 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
             )
           )
         ),
-        centerTitle: title == 'Catalog' ? true : false,
+        centerTitle: title == AppLocalizations.of(context)!.catalog_title ? true : false,
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
       ),
@@ -100,7 +110,7 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
                         ),
                         const SizedBox(width: 15,),
                         Text(
-                          "Search medicine",
+                          AppLocalizations.of(context)!.catalog_search_label,
                           style: GoogleFonts.montserrat(
                             textStyle: Theme.of(context).textTheme.titleSmall,
                             color: customBlack.shade400
@@ -130,6 +140,7 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
                       return ElevatedButton(
                         onPressed: (){
                           searchCategoryName.value = widget.medicineCategories.values.elementAt(ind).elementAt(index);
+                          _medicamentBloc.add(GetMedicsByCategoryEvent(widget.medicineCategories.values.elementAt(ind).elementAt(index)));
                           searchPageScreenIndex.value = 2;
                         },
                         style: const ButtonStyle(
@@ -178,6 +189,7 @@ class _CatalogueScreenState extends State<CatalogueScreen> {
                           onPressed: (){
                             if(widget.medicineCategories.values.elementAt(index).isEmpty){
                               searchCategoryName.value = widget.medicineCategories.keys.elementAt(index);
+                              _medicamentBloc.add(GetMedicsByCategoryEvent(widget.medicineCategories.keys.elementAt(index)));
                               searchPageScreenIndex.value = 2;
                             }
                             setState(() {

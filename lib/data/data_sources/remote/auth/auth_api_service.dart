@@ -11,7 +11,18 @@ abstract class AuthApiService{
 
   @POST('/auth')
   Future<HttpResponse<UserModel>> loginUser({
-    @Field("username") required String username,
+    @Field("iin") required String iin,
     @Field("password") required String password,
+  });
+
+  @POST('/registration')
+  Future<HttpResponse<UserModel>> registerUser({
+    @Field("username") required String username,
+    @Field("userSecondName") required String userSecondName,
+    @Field("userThirdName") required String userThirdName,
+    @Field("password") required String password,
+    @Field("confirmPassword") required String confirmPassword,
+    @Field("iin") required String iin,
+    @Field("phone_number") required String phone_number,
   });
 }

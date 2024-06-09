@@ -8,6 +8,7 @@ import 'package:medical_prescription/presentation/bloc/auth_bloc/auth_bloc.dart'
 import 'package:medical_prescription/presentation/pages/patient/auth_page.dart';
 import 'package:medical_prescription/presentation/pages/patient/profile_page.dart';
 import 'package:medical_prescription/presentation/screens/patient/patient_app.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -28,8 +29,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         appBar: AppBar(
           scrolledUnderElevation: 0,
           centerTitle: true,
-          title: const Text(
-              "Profile",
+          title: Text(
+            AppLocalizations.of(context)!.navbar_item_profile,
           ),
           shape: Border(
               bottom: BorderSide(color: customBlack.shade100, width: 1)
@@ -302,8 +303,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             const SizedBox(width: 15,),
                             Text(
-                                "Orders",
-                                style: Theme.of(context).textTheme.titleMedium
+                              AppLocalizations.of(context)!.profile_table_items_orders,
+                              style: Theme.of(context).textTheme.titleMedium
                             ),
                           ],
                         ),
@@ -338,7 +339,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             const SizedBox(width: 15,),
                             Text(
-                                "User agreement",
+                                AppLocalizations.of(context)!.profile_table_items_useragreement,
                                 style: Theme.of(context).textTheme.titleMedium
                             ),
                           ],
@@ -410,7 +411,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             const SizedBox(width: 15,),
                             Text(
-                                "Write to support",
+                                AppLocalizations.of(context)!.profile_table_items_wts,
                                 style: Theme.of(context).textTheme.titleMedium
                             ),
                           ],
@@ -457,7 +458,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         const SizedBox(width: 15,),
                         Text(
-                          "Log out",
+                          AppLocalizations.of(context)!.profile_table_items_logout,
                           style: GoogleFonts.exo2(
                               textStyle: Theme.of(context).textTheme.titleMedium,
                               color: Colors.red
@@ -520,8 +521,8 @@ Future <void> _dialogBuilder(BuildContext context){
                       overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                       textStyle: MaterialStatePropertyAll(GoogleFonts.montserrat(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16)),
                     ),
-                    child: const Text(
-                        "Logout"
+                    child: Text(
+                        AppLocalizations.of(context)!.profile_table_items_logout
                     ),
                   ),
                 ),

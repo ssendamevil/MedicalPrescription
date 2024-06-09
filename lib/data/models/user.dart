@@ -1,4 +1,4 @@
-import 'package:medical_prescription/domain/entities/user.dart';
+import 'package:medical_prescription/domain/entities/user/user.dart';
 
 class UserModel extends UserEntity{
   const UserModel({

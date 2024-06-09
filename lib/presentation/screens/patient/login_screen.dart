@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medical_prescription/presentation/pages/patient/auth_page.dart';
 import 'package:toastification/toastification.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../bloc/auth_bloc/auth_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -44,7 +45,9 @@ class _LoginScreenState extends State<LoginScreen> {
           },
           icon: const Icon(Iconsax.arrow_left),
         ),
-        title: Text("Login", style: GoogleFonts.montserrat(fontWeight: FontWeight.w500, fontSize: 16),),
+        title: Text(
+          AppLocalizations.of(context)!.login_btn,
+          style: GoogleFonts.montserrat(fontWeight: FontWeight.w500, fontSize: 16),),
         centerTitle: true,
       ),
       body: Padding(
@@ -55,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 30,),
             Image.asset("assets/logos/app-logo.png", height: 100,),
             const SizedBox(height: 10,),
-            Text("Login in Medics",
+            Text(AppLocalizations.of(context)!.login_screen_title,
               style: GoogleFonts.montserrat(
                   fontSize: 18,
                   fontWeight: FontWeight.w700
@@ -79,31 +82,31 @@ class _LoginScreenState extends State<LoginScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: 54,
-          child: TextFormField(
-            controller: _usernameController,
-            style: GoogleFonts.montserrat(fontSize: 16),
-            decoration: InputDecoration(
-                isDense: true,
-                prefixIcon: const Icon(Iconsax.user, color: Color(0xffA1A8B0), size: 21,),
-                hintText: "Enter your username",
-                hintStyle: GoogleFonts.montserrat(color: const Color(0xffA1A8B0), fontSize: 16),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Color(0xffE5E7EB),width: 1.0),
-                ),
-                filled: true,
-                fillColor: const Color(0xffF9FAFB),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Color(0xffE5E7EB),width: 1.0),
-                )
-            ),
-          ),
-        ),
-        const SizedBox(height: 10,),
+        // SizedBox(
+        //   width: MediaQuery.of(context).size.width,
+        //   height: 54,
+        //   child: TextFormField(
+        //     controller: _usernameController,
+        //     style: GoogleFonts.montserrat(fontSize: 16),
+        //     decoration: InputDecoration(
+        //         isDense: true,
+        //         prefixIcon: const Icon(Iconsax.user, color: Color(0xffA1A8B0), size: 21,),
+        //         hintText: AppLocalizations.of(context)!.textfield_username,
+        //         hintStyle: GoogleFonts.montserrat(color: const Color(0xffA1A8B0), fontSize: 16),
+        //         enabledBorder: OutlineInputBorder(
+        //           borderRadius: BorderRadius.circular(10),
+        //           borderSide: const BorderSide(color: Color(0xffE5E7EB),width: 1.0),
+        //         ),
+        //         filled: true,
+        //         fillColor: const Color(0xffF9FAFB),
+        //         focusedBorder: OutlineInputBorder(
+        //           borderRadius: BorderRadius.circular(10),
+        //           borderSide: const BorderSide(color: Color(0xffE5E7EB),width: 1.0),
+        //         )
+        //     ),
+        //   ),
+        // ),
+        // const SizedBox(height: 10,),
         SizedBox(
           width: MediaQuery.of(context).size.width,
           height: 54,
@@ -114,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
             decoration: InputDecoration(
                 isDense: true,
                 prefixIcon: const Icon(Iconsax.user, color: Color(0xffA1A8B0), size: 21,),
-                hintText: "Enter your IIN",
+                hintText: AppLocalizations.of(context)!.textfield_iin,
                 hintStyle: GoogleFonts.montserrat(color: const Color(0xffA1A8B0), fontSize: 16),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -141,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
             decoration: InputDecoration(
                 isDense: true,
                 prefixIcon: const Icon(Iconsax.lock_1, color: Color(0xffA1A8B0), size: 21,),
-                hintText: "Enter your password",
+                hintText: AppLocalizations.of(context)!.textfield_password,
                 hintStyle: GoogleFonts.montserrat(color: const Color(0xffA1A8B0), fontSize: 16),
                 suffix: IconButton(
                   style: const ButtonStyle(
@@ -182,10 +185,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))
               ),
               onPressed: (){
-                _authBloc.add(AuthLoginEvent(_usernameController.text, _passwordController.text));
+                _authBloc.add(AuthLoginEvent(_iinController.text, _passwordController.text));
               },
               child: Text(
-                "Login",
+                AppLocalizations.of(context)!.login_btn,
                 style: GoogleFonts.montserrat(fontSize:16, fontWeight: FontWeight.w400),
               )
           ),
@@ -196,12 +199,37 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _stateListener(BuildContext context, AuthState state) {
     if (state.stateType == AuthStateType.failure) {
+      Navigator.of(context).pop();
       toastification.show(
         title: Text(state.error.msg),
         autoCloseDuration: const Duration(seconds: 5),
         style: ToastificationStyle.fillColored,
         type: ToastificationType.error
       );
+    }else if(state.stateType == AuthStateType.isLoading){
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context){
+          return const Center(
+            child: SizedBox(
+              width: 68,
+              height: 150,
+              child: AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0))
+                ),
+                content: CircularProgressIndicator(color: Color(0xff198A8E)),
+                alignment: Alignment.center,
+                contentPadding: EdgeInsets.all(15),
+                insetPadding: EdgeInsets.zero,
+              ),
+            ),
+          );
+        }
+      );
+    }else if(state.stateType == AuthStateType.success){
+      Navigator.of(context).pop();
     }
   }
 }

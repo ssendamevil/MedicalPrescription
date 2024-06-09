@@ -1,6 +1,6 @@
 import 'package:hive_flutter/adapters.dart';
-import 'package:medical_prescription/domain/entities/cart.dart';
-import 'package:medical_prescription/domain/entities/token.dart';
+import 'package:medical_prescription/domain/entities/cart/cart.dart';
+import 'package:medical_prescription/domain/entities/token/token.dart';
 import 'hives.dart';
 
 class BoxHelper{
@@ -24,8 +24,8 @@ class BoxHelper{
     Hive.box<CartEntity>(Hives.boxCart).put(cartEntity.id, cartEntity);
   }
   
-  static CartEntity? getCartItem(){
-    return Hive.box<CartEntity>(Hives.boxCart).get(Hives.keyCart);
+  static CartEntity? getCartItem(CartEntity cartEntity){
+    return Hive.box<CartEntity>(Hives.boxCart).get(cartEntity.id);
   }
 
   static List<CartEntity>? getCart(){

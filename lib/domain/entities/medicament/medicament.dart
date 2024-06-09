@@ -1,8 +1,11 @@
-
+import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:medical_prescription/domain/entities/tag/tag.dart';
+
+part 'medicament.g.dart';
 
 @HiveType(typeId: 3)
-class MedicamentEntity{
+class MedicamentEntity extends Equatable{
   @HiveField(0)
   final int id;
   @HiveField(1)
@@ -13,17 +16,30 @@ class MedicamentEntity{
   final String country;
   @HiveField(4)
   final String company;
+  @HiveField(5)
+  final String imageUrl;
+  @HiveField(6)
+  final List<String> categories;
+  @HiveField(7)
+  final List<TagEntity> tags;
 
 
-  MedicamentEntity(
-    this.id,
-    this.name,
-    this.price,
-    this.country,
-    this.company,
-  );
+  const MedicamentEntity({
+    required this.id,
+    required this.name,
+    required this.price,
+    required this.country,
+    required this.company,
+    required this.imageUrl,
+    required this.categories,
+    required this.tags,
+  });
+
+  @override
+  List<Object?> get props => [id, name, price, country, company, imageUrl, categories, tags];
 }
 
+/*
 class MedicamentEntityAdapter extends TypeAdapter<MedicamentEntity>{
   @override
   MedicamentEntity read(BinaryReader reader) {
@@ -33,11 +49,11 @@ class MedicamentEntityAdapter extends TypeAdapter<MedicamentEntity>{
     };
 
     return MedicamentEntity(
-        fields[0] as int,
-        fields[1] as String,
-        fields[2] as double,
-        fields[3] as String,
-        fields[4] as String
+        id: fields[0] as int,
+        name: fields[1] as String,
+        price: fields[2] as double,
+        country: fields[3] as String,
+        company: fields[4] as String,
     );
   }
 
@@ -59,5 +75,5 @@ class MedicamentEntityAdapter extends TypeAdapter<MedicamentEntity>{
       ..writeByte(4)
       ..write(obj.company);
   }
-  
-}
+
+}*/

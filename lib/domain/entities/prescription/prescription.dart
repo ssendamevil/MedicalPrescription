@@ -1,11 +1,12 @@
 import 'package:equatable/equatable.dart';
+import 'package:medical_prescription/domain/entities/tag/tag.dart';
 
 class PrescriptionEntity extends Equatable{
   final int id;
   final String appointmentState;
-  final DateTime expirationDate;
-  final DateTime issueDate;
-  final List<String> activeIngredients;
+  final String expirationDate;
+  final String issueDate;
+  final List<TagEntity> activeIngredients;
   final int doctorId;
   final int patientId;
 

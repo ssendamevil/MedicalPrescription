@@ -2,8 +2,10 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:medical_prescription/presentation/bloc/pharmacy/qr_bloc/qr_bloc.dart';
 import 'package:medical_prescription/presentation/pages/pharmacy/pharmacy_home_page.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -19,6 +21,13 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   bool gotValidQR = false;
+  late QrBloc _qrBloc;
+  
+  @override
+  void initState() {
+    _qrBloc = context.read<QrBloc>();
+    super.initState();
+  }
 
   @override
   void reassemble() {
@@ -97,7 +106,7 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
         MediaQuery.of(context).size.height < 400)
         ? 330.0
-        : 660.0;
+        : 500.0;
     return QRView(
       key: qrKey,
       onQRViewCreated: _onQRViewCreated,
@@ -120,6 +129,7 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
         return;
       }
       gotValidQR = true;
+      _qrBloc.add(ScanQrCodeEvent('${scanData.code}'));
       setState(() {
         pharmacyHomePageIndex.value = 2;
       });

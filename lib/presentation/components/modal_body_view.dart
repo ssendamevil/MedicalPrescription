@@ -2,13 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:medical_prescription/domain/entities/cart/cart.dart';
+import 'package:medical_prescription/domain/entities/prescription/prescription.dart';
 import 'package:medical_prescription/presentation/screens/patient/checkout_screen.dart';
 
-import '../../domain/entities/mapPoint.dart';
+import '../../domain/entities/map/map_point.dart';
 
 class ModalBodyView extends StatefulWidget {
   const ModalBodyView({super.key, required this.point});
   final MapPoint point;
+  // final PrescriptionEntity prescriptionEntity;
+  // final CartEntity cartEntity;
 
   @override
   State<ModalBodyView> createState() => _ModalBodyViewState();
@@ -134,7 +138,13 @@ class _ModalBodyViewState extends State<ModalBodyView> {
                       ),
                       ElevatedButton(
                         onPressed: (){
-                          Navigator.of(context).push(CupertinoPageRoute(builder: (context)=> CheckoutScreen()));
+                          //сделать через блок
+                          Navigator.of(context).push(
+                            CupertinoPageRoute(
+                              builder: (context) =>
+                                const CheckoutScreen(prescriptionEntity: 19, medicaments: [17],)
+                            )
+                          );
                         },
                         style: ButtonStyle(
                           shape: MaterialStatePropertyAll(RoundedRectangleBorder(

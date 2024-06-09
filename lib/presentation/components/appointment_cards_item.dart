@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medical_prescription/domain/entities/prescription.dart';
+import 'package:medical_prescription/domain/entities/prescription/prescription.dart';
 import 'package:medical_prescription/presentation/pages/patient/search_page.dart';
 import 'package:medical_prescription/presentation/screens/patient/patient_app.dart';
 import 'package:medical_prescription/presentation/screens/patient/prescription_screen.dart';
@@ -41,7 +41,7 @@ class _AppointmentCardsItemState extends State<AppointmentCardsItem> {
       ),
       child: InkWell(
         onTap: (){
-          Navigator.push(context, CupertinoPageRoute(builder: (context) => const PrescriptionScreen()));
+          Navigator.push(context, CupertinoPageRoute(builder: (context) => PrescriptionScreen(prescriptionEntity: widget.prescriptionEntity,)));
         },
         child: Column(
           children: [

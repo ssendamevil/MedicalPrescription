@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ModalOrderItemsView extends StatefulWidget {
   const ModalOrderItemsView({Key? key}) : super(key: key);
@@ -29,7 +30,7 @@ class _ModalOrderItemsViewState extends State<ModalOrderItemsView> {
             child: Stack(
               children: [
                 Center(
-                  child: Text("Состав заказа",
+                  child: Text(AppLocalizations.of(context)!.order_details,
                     style: GoogleFonts.montserrat(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w600
@@ -52,7 +53,7 @@ class _ModalOrderItemsViewState extends State<ModalOrderItemsView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("1 Товар".toUpperCase(),
+                Text(AppLocalizations.of(context)!.avaible_prod('1').toUpperCase(),
                   style: GoogleFonts.montserrat(
                     fontSize: 16.0,
                     color: Colors.grey,

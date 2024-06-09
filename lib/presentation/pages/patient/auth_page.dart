@@ -13,8 +13,8 @@ class AuthPage extends StatefulWidget {
   final List<Widget> screens = [
     const AuthScreen(),
     const LoginScreen(),
-    const SignUpScreen(),
-    const VerificationScreen(),
+    // const SignUpScreen(),
+    // const VerificationScreen(),
     const SignUpFormScreen()
   ];
 

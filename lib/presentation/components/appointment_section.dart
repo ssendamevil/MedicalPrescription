@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medical_prescription/domain/entities/prescription.dart';
+import 'package:medical_prescription/domain/entities/prescription/prescription.dart';
 import 'package:medical_prescription/presentation/components/appointment_cards_item.dart';
 
 class AppointmentSection extends StatelessWidget {

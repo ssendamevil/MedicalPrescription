@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:medical_prescription/core/resources/data_state.dart';
-import 'package:medical_prescription/domain/entities/prescription.dart';
+import 'package:medical_prescription/domain/entities/prescription/prescription.dart';
 import 'package:medical_prescription/domain/usecases/get_prescriptions.dart';
 
 part 'prescription_event.dart';
@@ -14,7 +14,7 @@ class PrescriptionBloc extends Bloc<PrescriptionEvent, PrescriptionState> {
     on<GetAllPrscrpEvent>(_onGetAllPrescriptions);
   }
 
-  Future<void> _onGetAllPrescriptions(GetAllPrscrpEvent event, Emitter<PrescriptionState> emitter) async {
+  Future<void> _onGetAllPrescriptions(GetAllPrscrpEvent event, Emitter<PrescriptionState> emit) async {
 
     List<PrescriptionEntity> activePrescriptions = [];
     List<PrescriptionEntity> inactivePrescriptions = [];

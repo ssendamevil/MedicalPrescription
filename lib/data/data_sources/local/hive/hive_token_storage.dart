@@ -1,6 +1,6 @@
 import 'package:fresh/fresh.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:medical_prescription/domain/entities/token.dart';
+import 'package:medical_prescription/domain/entities/token/token.dart';
 
 import 'hives.dart';
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medical_prescription/presentation/pages/patient/auth_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -20,7 +21,8 @@ class _AuthScreenState extends State<AuthScreen> {
           children: [
             Image.asset("assets/logos/app-logo.png", height: 100,),
             const SizedBox(height: 40,),
-            Text("Let’s get started!",
+            Text(
+              AppLocalizations.of(context)!.login_greating_title,
               style: GoogleFonts.montserrat(
                   fontSize: 20,
                   fontWeight: FontWeight.w700
@@ -28,9 +30,10 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
             const SizedBox(height: 10,),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 25),
               child: Align(
-                child: Text("Login to enjoy the features we’ve provided, and stay healthy!",
+                child: Text(
+                  AppLocalizations.of(context)!.login_greating_desc,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.montserrat(
                     fontSize: 16,
@@ -58,7 +61,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   });
                 },
                 child: Text(
-                  "Login",
+                  AppLocalizations.of(context)!.login_btn,
                   style: GoogleFonts.montserrat(fontSize:16, fontWeight: FontWeight.w500),
                 )
               ),
@@ -81,7 +84,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   authPageIndex.value=2;
                 },
                 child: Text(
-                  "Sign Up",
+                  AppLocalizations.of(context)!.sign_up_btn,
                   style: GoogleFonts.montserrat(fontSize:16, fontWeight: FontWeight.w500),
                 )
               ),

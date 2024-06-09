@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:medical_prescription/presentation/pages/patient/profile_page.dart";
 import "package:medical_prescription/presentation/screens/patient/patient_app.dart";
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Widget sectionLabels(BuildContext context, String text, bool hasButton, int index){
   return Padding(
@@ -29,7 +30,7 @@ Widget sectionLabels(BuildContext context, String text, bool hasButton, int inde
               overlayColor: MaterialStatePropertyAll(Colors.transparent)
           ),
           child: Text(
-            "See all",
+            AppLocalizations.of(context)!.label_see_all,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
         ) :

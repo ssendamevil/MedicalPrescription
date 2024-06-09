@@ -22,14 +22,14 @@ class _AuthApiService implements AuthApiService {
 
   @override
   Future<HttpResponse<UserModel>> loginUser({
-    required username,
+    required iin,
     required password,
   }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
-      'username': username,
+      'iin': iin,
       'password': password,
     };
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -41,6 +41,46 @@ class _AuthApiService implements AuthApiService {
             .compose(
               _dio.options,
               '/auth',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UserModel.fromJson(_result.data!);
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<UserModel>> registerUser({
+    required username,
+    required userSecondName,
+    required userThirdName,
+    required password,
+    required confirmPassword,
+    required iin,
+    required phone_number,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'username': username,
+      'userSecondName': userSecondName,
+      'userThirdName': userThirdName,
+      'password': password,
+      'confirmPassword': confirmPassword,
+      'iin': iin,
+      'phone_number': phone_number,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<UserModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/registration',
               queryParameters: queryParameters,
               data: _data,
             )

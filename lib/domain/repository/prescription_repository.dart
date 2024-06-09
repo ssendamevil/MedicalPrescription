@@ -1,4 +1,4 @@
-import 'package:medical_prescription/domain/entities/prescription.dart';
+import 'package:medical_prescription/domain/entities/prescription/prescription.dart';
 import '../../core/resources/data_state.dart';
 
 abstract class PrescriptionRepository {

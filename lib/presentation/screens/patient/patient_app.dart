@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:medical_prescription/data/data_sources/local/hive/box_helper.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../bloc/cart_bloc/cart_bloc.dart';
 import '../../pages/patient/appointment_page.dart';
 import '../../pages/patient/cart_page.dart';
@@ -81,17 +82,17 @@ class _PatientAppState extends State<PatientApp> {
                   iconSize: 20,
                   elevation: 0,
                   items: <BottomNavigationBarItem>[
-                    const BottomNavigationBarItem(
-                        icon: SizedBox(height: 24, child: Icon(Iconsax.home)),
-                        label: 'Home'
+                    BottomNavigationBarItem(
+                        icon: const SizedBox(height: 24, child: Icon(Iconsax.home)),
+                        label: AppLocalizations.of(context)!.navbar_item_home
                     ),
-                    const BottomNavigationBarItem(
-                        icon: SizedBox(height: 24,width: 70, child: Icon(Iconsax.search_normal)),
-                        label: 'Search'
+                    BottomNavigationBarItem(
+                        icon: const SizedBox(height: 24,width: 70, child: Icon(Iconsax.search_normal)),
+                        label: AppLocalizations.of(context)!.navbar_item_search
                     ),
-                    const BottomNavigationBarItem(
-                        icon: SizedBox(height: 24, child: Icon(Iconsax.document)),
-                        label: 'Appointment'
+                    BottomNavigationBarItem(
+                        icon: const SizedBox(height: 24, child: Icon(Iconsax.document)),
+                        label: AppLocalizations.of(context)!.navbar_item_appointment
                     ),
                     BottomNavigationBarItem(
                         icon: BlocBuilder<CartBloc, CartState>(
@@ -131,11 +132,11 @@ class _PatientAppState extends State<PatientApp> {
                             );
                           },
                         ),
-                        label: 'Cart'
+                        label: AppLocalizations.of(context)!.navbar_item_cart
                     ),
-                    const BottomNavigationBarItem(
-                        icon: SizedBox(height: 24, child: Icon(Iconsax.profile_circle)),
-                        label: 'Profile'
+                    BottomNavigationBarItem(
+                        icon: const SizedBox(height: 24, child: Icon(Iconsax.profile_circle)),
+                        label: AppLocalizations.of(context)!.navbar_item_profile
                     )
                   ],
                 ),
